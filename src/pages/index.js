@@ -2,9 +2,19 @@ import { Notifications } from '@mantine/notifications';
 import { MantineProvider } from '@mantine/core';
 import App from './App';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 function Home() {
   
+
+  useEffect(() => {
+    const { worker } = require('./mocks/browser')
+  
+    worker.start()
+    }, []);
+  
+  
+
   return (
     <>
       <Head>

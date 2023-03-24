@@ -1,9 +1,6 @@
 import axios from "axios"
 
 export async function loginUser(credentials) {
-    console.log("inside api")
-    console.log(credentials.email);
-    console.log(credentials.password);
     const response = axios.post('http://localhost:3000/api/user', {
     validateStatus:false,
     headers: {

@@ -113,11 +113,6 @@ const data = [
 ]
 
 function NavBarSimple() {
-  
-  // dev comment
-  // if(!token || token.token == null){
-  //   return <Home/>
-  // }
 
   const { classes, cx } = useStyles()
   const [active, setActive] = useState("Billing")

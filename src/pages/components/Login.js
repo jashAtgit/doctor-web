@@ -14,32 +14,27 @@ import {
   Group,
   Button,
 } from '@mantine/core';
-import { useValidatedState } from '@mantine/hooks';
-import { Notification } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
-import { showNotification, notifications } from '@mantine/notifications';
+import { notifications } from '@mantine/notifications';
 
-function Login({setToken}) {
-    // const [email, setEmail] = useState('')
-    const [{ email, lastValidEmail, valid }, setEmail] = useValidatedState(
-      '',
-      (val) => /^\S+@\S+$/.test(val),
-      true
-    );
-    const [password, setPassword] = useState('');
+function Login({props})  {
     
-    //T0-DO email validation on submit
-    // console.log(email);
-    // notifications.show({message: "hello!!"});
+    const setToken = props.setToken;
+    const email = props.email;
+    const setEmail = props.setEmail;
+    const password = props.password;
+    const setPassword = props.setPassword;
+    const token = props.token
+
     
+    function valid(email){
+      return /\S+@\S+\.\S+/.test(email);
+    }
 
     const handleLogin = async e => {
-      // console.log(email);
 
         e.preventDefault();
 
-        // valid email and empty pass check and notify
-        if(!valid || !password){
+        if(!valid(email) || !password){
           console.log("inside validation");
           notifications.show({
             title: "Login failed",
@@ -49,8 +44,10 @@ function Login({setToken}) {
           
           return;
         }
+
+        console.log("email inside handle login " + email);
         const token = await loginUser({
-          lastValidEmail,
+          email,
           password
         });
         if(token == 'error'){
@@ -59,9 +56,6 @@ function Login({setToken}) {
         console.log(token);
         setToken(token);
       }
-
-      
-
 
       return (
         <Container size={420} my={40}>
@@ -85,7 +79,7 @@ function Login({setToken}) {
             <TextInput value={email}
             onChange={(event) => setEmail(event.currentTarget.value)}
             withAsterisk
-            error={!valid}
+            error={!valid(email)}
             placeholder="email@example.com"
             label="Your email"/>
             <PasswordInput label="Password" placeholder="Your password" required mt="md" onChange={e => setPassword(e.target.value)}/>
