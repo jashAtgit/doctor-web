@@ -7,38 +7,36 @@ import {
     Select,
     ScrollArea
   } from "@mantine/core"
-  
-  const rolesData = ["Manager", "Collaborator", "Contractor"]
+
+import {
+  IconAnkh, IconUser,
+} from "@tabler/icons-react"
+import Link from "next/link"
   
   export function PatientsTable({ data }) {
     const rows = data.map(item => (
-      <tr key={item.name}>
+      <tr key={item.patient_id}>
         <td>
           <Group spacing="sm">
-            <Avatar size={40} src={item.avatar} radius={40} />
+            <IconUser size={40} />
             <div>
               <Text fz="sm" fw={500}>
-                {item.name}
+                {`${item.fname} ${item.lname}`}
               </Text>
               <Text fz="xs" c="dimmed">
-                {item.email}
+                {item.sex}
               </Text>
             </div>
           </Group>
         </td>
   
         <td>
-          <Select data={rolesData} defaultValue={item.role} variant="unstyled" />
+          {/* <Select data={rolesData} defaultValue={item.role} variant="unstyled" /> */}
+          {`${item.age} years`}
         </td>
-        <td>{Math.floor(Math.random() * 6 + 5)} days ago</td>
+        <td>{item.sex}</td>
         <td>
-          {Math.random() > 0.5 ? (
-            <Badge fullWidth>Active</Badge>
-          ) : (
-            <Badge color="gray" fullWidth>
-              Disabled
-            </Badge>
-          )}
+          <Link href={{ pathname: '/patient-profile', query: { patient_id: `${item.patient_id}`} }}>View Details</Link>
         </td>
       </tr>
     ))
@@ -48,10 +46,10 @@ import {
         <Table miw={800} verticalSpacing="sm">
           <thead>
             <tr>
-              <th>Employee</th>
-              <th>Role</th>
-              <th>Last active</th>
-              <th>Status</th>
+              <th>Patient</th>
+              <th>Age</th>
+              <th>Sex</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>

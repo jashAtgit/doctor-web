@@ -10,22 +10,18 @@ import axios from "axios"
 // })()
 
 export async function getDoc(username) {
-
-    console.log("username recvd : " + username);
-    const response = axios.get(`http://localhost:3000/doctor`,
+    //get doctor using username
+    // change to `http://localhost:3000/doctor?username=${username}`
+    const response = axios.get(`http://localhost:3000/doctor?username=${username}`,
     {
     headers: {
         'Content-Type': 'application/json'
     },
-    })
-    .then(response => response.data)
+    }).then(response => response.data)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";
 
     });
-
-    console.log("data recvd -- ");
-    console.log(response.data);
     return response
 }

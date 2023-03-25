@@ -45,7 +45,6 @@ function Login({props})  {
           return;
         }
 
-        console.log("email inside handle login " + email);
         const token = await loginUser({
           email,
           password
@@ -53,8 +52,7 @@ function Login({props})  {
         if(token == 'error'){
             return <Login setToken={setToken}/>
         }
-        console.log(token);
-        setToken(token);
+        setToken(token['token']);
       }
 
       return (
@@ -76,7 +74,7 @@ function Login({props})  {
           </Text>
     
           <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-            <TextInput value={email}
+            <TextInput value={email || ''}
             onChange={(event) => setEmail(event.currentTarget.value)}
             withAsterisk
             error={!valid(email)}
@@ -99,6 +97,3 @@ function Login({props})  {
 
 export default Login;
 
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-}

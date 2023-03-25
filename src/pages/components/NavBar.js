@@ -10,15 +10,11 @@ import {
   Flex
 } from "@mantine/core"
 import {
-  IconBellRinging,
-  IconFingerprint,
-  IconKey,
   IconSettings,
-  Icon2fa,
-  IconDatabaseImport,
-  IconReceipt2,
-  IconSwitchHorizontal,
-  IconLogout
+  IconLogout,
+  IconUsers,
+  IconActivityHeartbeat,
+  IconBandage,
 } from "@tabler/icons-react"
 import Home from "..";
 
@@ -104,7 +100,7 @@ const useStyles = createStyles(theme => ({
 
 const data = [
   // { link: "", label: "Notifications", icon: IconBellRinging },
-  { link: "", label: "Billing", icon: IconReceipt2 },
+  { link: "", label: "Patients", icon: IconUsers },
   // { link: "", label: "Security", icon: IconFingerprint },
   // { link: "", label: "SSH Keys", icon: IconKey },
   // { link: "", label: "Databases", icon: IconDatabaseImport },
@@ -112,10 +108,11 @@ const data = [
   { link: "", label: "Other Settings", icon: IconSettings }
 ]
 
-function NavBarSimple() {
+function NavBarSimple({clearToken, setToken}) {
+
 
   const { classes, cx } = useStyles()
-  const [active, setActive] = useState("Billing")
+  const [active, setActive] = useState("Patients")
 
   const links = data.map(item => (
     <a
@@ -139,7 +136,7 @@ function NavBarSimple() {
     <Navbar  width={{sm:300}} p="md" className={classes.navbar}>
       <Navbar.Section grow>
       <Group className={classes.header} position="apart">
-          {/* <MantineLogo size={28} inverted /> */}
+          <IconActivityHeartbeat size={30} color={'white'}/>
           <Code className={classes.version}>v1.0</Code>
         </Group>
         {links}
@@ -150,9 +147,12 @@ function NavBarSimple() {
         <a
           href="#"
           className={classes.link}
-          onClick={event => event.preventDefault()}
+          onClick={() => {
+            setToken();
+            clearToken();
+          }}
         >
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
+          <IconLogout className={classes.linkIcon} stroke={1.5}/>
           <span>Logout</span>
         </a>
       </Navbar.Section>

@@ -13,7 +13,6 @@ function Home() {
     worker.start()
     }, []);
   
-  
 
   return (
     <>
