@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import PropTypes from 'prop-types';
-import { loginUser } from '../services/user';
+import { loginDoctor } from '../services/doctor';
 import {
   TextInput,
   PasswordInput,
@@ -23,7 +22,9 @@ function Login({props})  {
     const setEmail = props.setEmail;
     const password = props.password;
     const setPassword = props.setPassword;
-    const token = props.token
+    const token = props.token;
+
+    const role = 'doctor';
 
     
     function valid(email){
@@ -45,9 +46,10 @@ function Login({props})  {
           return;
         }
 
-        const token = await loginUser({
+        const token = await loginDoctor({
           email,
-          password
+          password,
+          role,
         });
         if(token == 'error'){
             return <Login setToken={setToken}/>

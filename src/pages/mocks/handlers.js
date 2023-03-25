@@ -2,19 +2,24 @@
 import { rest } from 'msw';
 
 export const handlers = [
-    rest.get('http://localhost:3000/doctor*', (req, res, ctx) => {
+
+    //get doctor info using doc_id
+    rest.get('http://localhost:3000/doctors/:doc_id', (req, res, ctx) => {
+
+        const {doc_id} = req.params;
+
         return res(
             ctx.status(200),
             ctx.json({
-                user_id: 2,
+                user_id: doc_id,
                 fname: 'Mishra',
                 lname: 'ji',
             })
         )
     }),
 
-
-    rest.get('http://localhost:3000/patients*', (req, res, ctx) => {
+    //get patients assigned to a docter with doc_id
+    rest.get('http://localhost:3000/doctors/:doc_id/patients', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json([
@@ -33,6 +38,27 @@ export const handlers = [
                     sex: 'Male',
                 }
             ])
+        )
+    }),
+
+    // mood
+    rest.get('http://localhost:3000/patients/:patient_id/mood', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                mood_value: 3
+            })
+        )
+    }),
+
+    //loginDoctor
+    rest.post('http://localhost:3000/doctors/login', (req, res, ctx) => {
+
+        return res(
+            ctx.status(200),
+            ctx.json({
+                token: 'token123'
+            })
         )
     }),
 

@@ -1,11 +1,9 @@
 import { AppShell, Navbar, Header, em } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
-import {data as pats} from "../api/data/patients.json"
 
 import { getDoc } from '../services/doctor';
-import { getPatientsByDocId } from '../services/patient';
-
+import { getPatientsByDocId } from '../services/doctor';
 import { useEffect, useState } from 'react';
 
 
@@ -21,24 +19,18 @@ function Dashboard({props}) {
   const [patient_list, setPatientList] = useState([]);
 
 
-  // dev comment
-  // if(!token || token.token == null){
-  //   return <Home/>
-  // }
-
-
   function clearToken(){
     localStorage.removeItem('token');
   }
 
 
-    //get data from backend required for dashbaord display
+  //get data from backend required for dashbaord display
   useEffect( () => {
 
     async function fetchData() {
       const data = await getDoc(email);
       setUserId(data.user_id);
-  
+
       const patient_data = await getPatientsByDocId(user_id);
       setPatientList(patient_data);
     }
@@ -54,7 +46,7 @@ function Dashboard({props}) {
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
     >
-      {<><PatientsTable data={patient_list} /> <h1>Hello {email}!!</h1></>}
+      {<><PatientsTable data={patient_list} /> </>}
     </AppShell>
   );
 }

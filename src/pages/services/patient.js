@@ -1,8 +1,10 @@
 import axios from "axios"
 
-export async function getPatientsByDocId(doc_id) {
-    //get list of patients with this doc_id
-    const response = axios.get(`http://localhost:3000/patients?doc_id=${doc_id}`,
+
+
+export async function getPatientMood(patient_id) {
+    //get patient's mood on current date(or latest)
+    const response = axios.get(`http://localhost:3000/patients/${patient_id}/mood`,
     {
     headers: {
         'Content-Type': 'application/json'
@@ -15,3 +17,5 @@ export async function getPatientsByDocId(doc_id) {
     });
     return response
 }
+
+
