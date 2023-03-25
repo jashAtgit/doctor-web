@@ -37,7 +37,7 @@ export function PatientsTable({ data }) {
       </td>
       <td>{item.sex}</td>
       <td>
-        <Link href={{ pathname: '/patient-profile', query: { patient_id: `${item.patient_id}`} }}>View Details</Link>
+        <Link href={{ pathname: '/patient-profile/', query: { patient_id: `${item.patient_id}`} }}>View Details</Link>
       </td>
     </tr>
   ))
