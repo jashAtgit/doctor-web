@@ -1,7 +1,9 @@
-import { Text, Button, Paper, Space, SimpleGrid, Stack } from '@mantine/core';
+import { Text, Button, Paper, Space, SimpleGrid, Stack, ScrollArea } from '@mantine/core';
 import { IconUser } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
+import { getAllActivities } from '../services/item';
 import { getPatientDemographics } from '../services/patient';
+import { ActivitySelectionTable } from './activities-table';
 
 
 
@@ -9,18 +11,25 @@ export function PatientCard({patientData}) {
 
   const { pid, ...medData } = patientData;
   const [demographicsData, setDemographicData] = useState();
+  const [activities, setActivities] = useState();
+
+  
 
   useEffect(() => {
-    async function fetchDemographics(patient_id){
+    async function fetchData(patient_id){
       const demographics = await getPatientDemographics(patient_id);
       setDemographicData(demographics);
+
+      const activities = await getAllActivities();
+      setActivities(activities);
+
     }
 
-    fetchDemographics(pid);
+    fetchData(pid);
     
   }, [pid])
 
-  if(!demographicsData || demographicsData === 'undefined'){
+  if(!activities || activities === 'undefined'){
     return (
       <h1>Loading....</h1>
     )
@@ -63,8 +72,9 @@ export function PatientCard({patientData}) {
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
       })}
-      >
-            <Stack h={300} align="flex-start" justify="flex-start">
+      >   
+        <h1>Medical Details</h1>
+            <Stack h={200} align="flex-start" justify="flex-start">
               <Text fz="md"> {`Height : ${medData.height} cms`}</Text>
               <Text fz="md"> {`Weight : ${medData.weight} Kg`} </Text>
               <Text fz="md"> {`Smoker : ${medData.is_smoker}`} </Text>
@@ -72,6 +82,19 @@ export function PatientCard({patientData}) {
             </Stack>
 
     </Paper>
+
+    <Space h="xl" />
+    <Paper      
+      radius="md"
+      withBorder
+      p="lg"
+      sx={(theme) => ({
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+      })}
+      grow component={ScrollArea}
+      >  
+      <ActivitySelectionTable data={activities} />
+      </Paper>
     </Paper>
 
 

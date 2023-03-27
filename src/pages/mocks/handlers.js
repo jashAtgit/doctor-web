@@ -22,22 +22,7 @@ export const handlers = [
     rest.get('/doctors/:doc_id/patients', (req, res, ctx) => {
         return res(
             ctx.status(200),
-            ctx.json([ 1,2
-                // {   
-                //     patient_id: 1,
-                //     fname: 'Durga',
-                //     lname: 'Parasad Reddy',
-                //     age: 30,
-                //     sex: 'Male',
-                // },
-                // {
-                //     patient_id: 2,
-                //     fname: 'Himanshu',
-                //     lname: 'Disgrace',
-                //     age: 16,
-                //     sex: 'Male',
-                // }
-            ])
+            ctx.json([1,2])
         )
     }),
 
@@ -143,6 +128,33 @@ export const handlers = [
               )
         }
 
+    }),
+
+
+    //get all activities
+    rest.get('/activities', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json([
+                {
+                   activity_id: 1,
+                   name: 'Self Evaluation : Anxiety',
+                   desc: 'questionnaire exercise to evaluate traits of anxiety' 
+                },
+                {
+                   activity_id: 2,
+                   name: 'Sleeping Habits',
+                   desc: 'questionnaire exercise to evaluate sleeping habits' 
+
+                },
+                {
+                   activity_id: 3,
+                   name: 'Depression',
+                   desc: 'questionnaire exercise to learn about depression' 
+
+                },
+            ])
+        )
     }),
 
 
