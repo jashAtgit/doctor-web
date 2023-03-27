@@ -6,14 +6,6 @@ import { useEffect } from 'react';
 
 function Home() {
   
-
-  useEffect(() => {
-    const { worker } = require('./mocks/browser')
-  
-    worker.start()
-    }, []);
-  
-
   return (
     <>
       <Head>
@@ -27,5 +19,6 @@ function Home() {
   );
 
 };
+
 
 export default Home;

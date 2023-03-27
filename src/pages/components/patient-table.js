@@ -15,6 +15,7 @@ import Link from "next/link"
  
 export function PatientsTable({ data }) {
 
+  
   const rows = data.map(item => (
     <tr key={item.patient_id}>
       <td>
@@ -32,7 +33,6 @@ export function PatientsTable({ data }) {
       </td>
 
       <td>
-        {/* <Select data={rolesData} defaultValue={item.role} variant="unstyled" /> */}
         {`${item.age} years`}
       </td>
       <td>{item.sex}</td>

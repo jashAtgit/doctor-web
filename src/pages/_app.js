@@ -1,9 +1,16 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
+import { useEffect } from 'react';
 
 export default function App(props) {
   const { Component, pageProps } = props;
+
+  useEffect(() => {
+    const { worker } = require('./mocks/browser')
+  
+    worker.start()
+    }, []);
 
   return (
     <>

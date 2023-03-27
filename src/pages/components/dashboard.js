@@ -2,8 +2,8 @@ import { AppShell, Navbar, Header, em } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
-import { getDoc } from '../services/doctor';
-import { getPatientsByDocId } from '../services/doctor';
+import { getPatientDemographics } from '../services/patient';
+import { getPatientIdsByDocId, getDoc } from '../services/doctor';
 import { useEffect, useState } from 'react';
 
 
@@ -24,6 +24,7 @@ function Dashboard({props}) {
   }
 
 
+
   //get data from backend required for dashbaord display
   useEffect( () => {
 
@@ -31,8 +32,14 @@ function Dashboard({props}) {
       const data = await getDoc(email);
       setUserId(data.user_id);
 
-      const patient_data = await getPatientsByDocId(user_id);
-      setPatientList(patient_data);
+      const patient_ids = await getPatientIdsByDocId(user_id);
+
+      let demographicsData = [];
+      for (const patientId of patient_ids) {
+        const patientDemographics = await getPatientDemographics(patientId);
+        demographicsData.push(patientDemographics);
+      }
+      setPatientList(demographicsData);
     }
     fetchData();
   }, []);

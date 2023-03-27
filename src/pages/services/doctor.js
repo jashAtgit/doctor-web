@@ -1,11 +1,18 @@
 import axios from "axios"
+import { useEffect, useState } from "react";
+
+
 
 export async function getDoc(username) {
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     //get doctor using username
-    const response = axios.get(`http://localhost:3000/doctors/${username}`,
+    console.log("inside service");
+    const response = axios.get(`/doctors/${username}`,
     {
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
     },
     }).then(response => response.data)
     .catch(err => {
@@ -17,7 +24,8 @@ export async function getDoc(username) {
 }
 
 export async function loginDoctor(credentials) {
-    const response = axios.post('http://localhost:3000/doctors/login', {
+    
+    const response = axios.post('/doctors/login', {
     validateStatus:false,
     headers: {
         'Content-Type': 'application/json'
@@ -33,12 +41,15 @@ export async function loginDoctor(credentials) {
     return response
 }
 
-export async function getPatientsByDocId(doc_id) {
+export async function getPatientIdsByDocId(doc_id) {
     //get list of patients with this doc_id
-    const response = axios.get(`http://localhost:3000/doctors/${doc_id}/patients`,
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
+    const response = axios.get(`/doctors/${doc_id}/patients`,
     {
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
     },
     }).then(response => response.data)
     .catch(err => {
@@ -46,5 +57,6 @@ export async function getPatientsByDocId(doc_id) {
         return "error";
 
     });
+
     return response
 }
