@@ -3,7 +3,7 @@ import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
 import { getPatientDemographics } from '../services/patient';
-import { getPatientIdsByDocId, getDoc } from '../services/doctor';
+import { getPatientIdsByDocId, getDocIdByEmail } from '../services/doctor';
 import { useEffect, useState } from 'react';
 
 
@@ -15,7 +15,7 @@ function Dashboard({props}) {
   const setPassword = props.setPassword;
   const token = props.token;
 
-  const [user_id, setUserId] = useState();
+  const [doctor_id, setDoctorId] = useState();
   const [patient_list, setPatientList] = useState([]);
 
 
@@ -29,10 +29,10 @@ function Dashboard({props}) {
   useEffect( () => {
 
     async function fetchData() {
-      const data = await getDoc(email);
-      setUserId(data.user_id);
+      const data = await getDocIdByEmail(email);
+      setDoctorId(data.doctor_id);
 
-      const patient_ids = await getPatientIdsByDocId(user_id);
+      const patient_ids = await getPatientIdsByDocId(doctor_id);
 
       let demographicsData = [];
       for (const patientId of patient_ids) {
@@ -43,6 +43,13 @@ function Dashboard({props}) {
     }
     fetchData();
   }, []);
+
+
+  if(!patient_list || patient_list.length === 0){
+    return (
+      <h1>Loading...</h1>
+    )
+  }
   
 
   return (
@@ -53,7 +60,7 @@ function Dashboard({props}) {
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
     >
-      {<><PatientsTable data={patient_list} /> </>}
+      {<><PatientsTable data={patient_list} doctor_id={doctor_id} /> </>}
     </AppShell>
   );
 }

@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { notifications } from '@mantine/notifications';
 import { createStyles, Table, Checkbox, ScrollArea, Group, Divider, Text, rem, Select, SelectItem, Button, Space, Paper } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
@@ -18,11 +19,22 @@ const options = [
     { value: '5', label: 'Level 5' },
   ];
 
-export function ActivitySelectionTable({ data }) {
+function handleAssign(doctor_id, patient_id, selection, levels){
+  console.log(doctor_id);
+  console.log(patient_id);
+  console.log(levels);
+  console.log(selection);
 
-    const [selectedValues, setSelectedValues] = useState(
-        new Array(data.length).fill(options[0].value)
-      );
+  // build assignment list;
+}
+
+
+export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
+
+  //using hashTable to map <activity_id : value choice>
+  const [selectedValues, setSelectedValues] = useState(
+    data.reduce((obj, item) => ({ ...obj, [item.activity_id]: options[0].value }), {})
+  );
 
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState([]);
@@ -36,8 +48,8 @@ export function ActivitySelectionTable({ data }) {
   const rows = data.map((item) => {
     const selected = selection.includes(item.activity_id);
 
-    console.log(selectedValues);
-
+    // console.log(selectedValues);
+   
     return (
       <tr key={item.activity_id} className={cx({ [classes.rowSelected]: selected })}>
         <td>
@@ -58,11 +70,11 @@ export function ActivitySelectionTable({ data }) {
         <td>
             <Select
           data={options}
-          value={selectedValues[item.activity_id-1]}
+          value={selectedValues[item.activity_id]}
           onChange={(value) => {
             setSelectedValues((current) => ({
               ...current,
-              [item.activity_id-1]: value,
+              [item.activity_id]: value,
             }));
           }}
           withinPortal={true}
@@ -98,7 +110,8 @@ export function ActivitySelectionTable({ data }) {
       <Divider my="sm" />
       <Space h='sm' variant='dotted'/>
       <div style={{ textAlign: 'center' }}>
-        <Button uppercase type='submit'>
+        <Button uppercase onClick={() => {
+          handleAssign(doctor_id, patient_id, selection, selectedValues)}}>
               Assign
         </Button>
       </div>

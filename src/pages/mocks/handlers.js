@@ -3,17 +3,27 @@ import { rest } from 'msw';
 
 export const handlers = [
 
-    //get doctor info using doc_id
-    rest.get('/doctors/:doc_id', (req, res, ctx) => {
+    // //get doctor info using doc_id
+    // rest.get('/doctors/:doc_id', (req, res, ctx) => {
 
-        const {doc_id} = req.params;
+    //     const {doc_id} = req.params;
+    //     return res(
+    //         ctx.status(200),
+    //         ctx.json({
+    //             doctor_id: doc_id,
+    //             fname: 'Mishra',
+    //             lname: 'ji',
+    //         })
+    //     )
+    // }),
+
+    //get doctor_id by his username
+    rest.get('/doctors/:username', (req, res, ctx) => {
 
         return res(
             ctx.status(200),
             ctx.json({
-                user_id: doc_id,
-                fname: 'Mishra',
-                lname: 'ji',
+                doctor_id: 3,
             })
         )
     }),
@@ -137,7 +147,7 @@ export const handlers = [
             ctx.status(200),
             ctx.json([
                 {
-                   activity_id: 1,
+                   activity_id: 9,
                    name: 'Self Evaluation : Anxiety',
                    desc: 'questionnaire exercise to evaluate traits of anxiety' 
                 },
@@ -148,7 +158,7 @@ export const handlers = [
 
                 },
                 {
-                   activity_id: 3,
+                   activity_id: 5,
                    name: 'Depression',
                    desc: 'questionnaire exercise to learn about depression' 
 

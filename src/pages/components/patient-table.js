@@ -1,21 +1,17 @@
 import {
-    Avatar,
-    Badge,
     Table,
     Group,
     Text,
-    Select,
     ScrollArea,
   } from "@mantine/core"
 
 import {
-  IconAnkh, IconUser,
+  IconUser,
 } from "@tabler/icons-react"
 import Link from "next/link"
  
-export function PatientsTable({ data }) {
+export function PatientsTable({ data, doctor_id }) {
 
-  
   const rows = data.map(item => (
     <tr key={item.patient_id}>
       <td>
@@ -37,7 +33,7 @@ export function PatientsTable({ data }) {
       </td>
       <td>{item.sex}</td>
       <td>
-        <Link href={{ pathname: '/patient-profile/', query: { patient_id: `${item.patient_id}`} }}>View Details</Link>
+        <Link href={{ pathname: '/patient-profile/', query: { patient_id: `${item.patient_id}`, doctor_id: doctor_id }}}>View Details</Link>
       </td>
     </tr>
   ))
@@ -47,7 +43,7 @@ export function PatientsTable({ data }) {
       <Table miw={800} verticalSpacing="sm">
         <thead>
           <tr>
-            <th>Patient</th>
+            <th>Patient Name</th>
             <th>Age</th>
             <th>Sex</th>
             <th>Options</th>

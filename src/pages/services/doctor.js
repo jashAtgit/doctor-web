@@ -1,9 +1,6 @@
 import axios from "axios"
-import { useEffect, useState } from "react";
 
-
-
-export async function getDoc(username) {
+export async function getDocIdByEmail(username) {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     //get doctor using username

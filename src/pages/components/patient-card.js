@@ -9,7 +9,7 @@ import { ActivitySelectionTable } from './activities-table';
 
 export function PatientCard({patientData}) {
 
-  const { pid, ...medData } = patientData;
+  const { patient_id, doctor_id, ...medData} = patientData;
   const [demographicsData, setDemographicData] = useState();
   const [activities, setActivities] = useState();
 
@@ -25,9 +25,10 @@ export function PatientCard({patientData}) {
 
     }
 
-    fetchData(pid);
+    fetchData(patient_id);
     
-  }, [pid])
+  }, [patient_id])
+
 
   if(!activities || activities === 'undefined'){
     return (
@@ -56,7 +57,7 @@ export function PatientCard({patientData}) {
         {`${demographicsData.age} years • ${demographicsData.sex}`}
       </Text>
       <Text ta="center" c="dimmed" fz="sm">
-        {`User-Id : ${pid}`}
+        {`User-Id : ${patient_id}`}
       </Text>
       
 
@@ -112,7 +113,7 @@ export function PatientCard({patientData}) {
         >
           <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Push Activities</Title>  
           <Divider my="sm" />
-          <ActivitySelectionTable data={activities}/>
+          <ActivitySelectionTable data={activities} doctor_id={doctor_id} patient_id={patient_id}/>
         </Paper>
     </Paper>
 
