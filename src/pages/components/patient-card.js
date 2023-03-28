@@ -1,5 +1,5 @@
-import { Text, Button, Paper, Space, SimpleGrid, Stack, ScrollArea } from '@mantine/core';
-import { IconUser } from '@tabler/icons-react';
+import { Text, Button, Paper, Space, Title, Flex, Divider} from '@mantine/core';
+import { IconUser, IconSmoking, IconSmokingNo, IconBeer, IconBeerOff,  IconRulerMeasure, IconWeight } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { getAllActivities } from '../services/item';
 import { getPatientDemographics } from '../services/patient';
@@ -38,8 +38,8 @@ export function PatientCard({patientData}) {
 
   return (
     <Paper
-      radius="md"
-      withBorder
+      radius="xl"
+      // shadow="xl"
       p="lg"
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
@@ -60,41 +60,60 @@ export function PatientCard({patientData}) {
       </Text>
       
 
-      <Button variant="default" fullWidth mt="md">
+      <Button variant="default" fullWidth mt="md" radius="xl" shadow="sm">
         Send message
       </Button>
 
       <Space h="xl" />
       <Paper
-      radius="md"
+      radius="xl"
+      shadow="sm"
       withBorder
       p="lg"
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
       })}
+      
       >   
-        <h1>Medical Details</h1>
-            <Stack h={200} align="flex-start" justify="flex-start">
-              <Text fz="md"> {`Height : ${medData.height} cms`}</Text>
-              <Text fz="md"> {`Weight : ${medData.weight} Kg`} </Text>
-              <Text fz="md"> {`Smoker : ${medData.is_smoker}`} </Text>
-              <Text fz="md"> {`Alcohol : ${medData.drinks_alcohol}`} </Text>
-            </Stack>
+        <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Health Details</Title>
+        <Divider my="sm" />
+            <Flex  gap="xl"
+              justify="center"
+              align="center"
+              direction="row"
+              wrap="nowrap"
+              mih={100}
+              
+              >
+              <div style={{display: "flex", justifyContent: "center"}}>
+              <Text fz="md"> {<IconRulerMeasure/>}</Text>
+              {medData.height} Cms 
+              </div>
+              <div style={{display: "flex", justifyContent: "center"}}>
+              <Text fz="md"> {<IconWeight/>}</Text>
+              {medData.weight} Kg
+              </div>
+              <Text fz="md"> {medData.is_smoker ? <IconSmoking/> : <IconSmokingNo/>}</Text>
+              <Text fz="md"> {medData.drinks_alcohol ? <IconBeer/> : <IconBeerOff/>} </Text>
+            </Flex>
 
-    </Paper>
-
-    <Space h="xl" />
-    <Paper      
-      radius="md"
-      withBorder
-      p="lg"
-      sx={(theme) => ({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-      })}
-      grow component={ScrollArea}
-      >  
-      <ActivitySelectionTable data={activities} />
       </Paper>
+
+    <Space h="xl"/>
+      <Paper      
+        radius="xl"
+        withBorder
+        p="lg"
+        shadow="xl"
+        sx={(theme) => ({
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+        })}
+      
+        >
+          <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Push Activities</Title>  
+          <Divider my="sm" />
+          <ActivitySelectionTable data={activities}/>
+        </Paper>
     </Paper>
 
 

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, Select, SelectItem, Button, Space, Paper } from '@mantine/core';
+import { createStyles, Table, Checkbox, ScrollArea, Group, Divider, Text, rem, Select, SelectItem, Button, Space, Paper } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -49,7 +49,6 @@ export function ActivitySelectionTable({ data }) {
         </td>
         <td>
           <Group spacing="sm">
-            {/* <Avatar size={26} src={item.avatar} radius={26} /> */}
             <Text size="sm" weight={500}>
               {item.name}
             </Text>
@@ -57,12 +56,6 @@ export function ActivitySelectionTable({ data }) {
         </td>
         <td>{item.desc}</td>
         <td>
-            {/* <Select
-            data={options} 
-            defaultValue={`${options[0].value}`}
-            value={selectedValue}
-            onChange={setSelectedValue}
-            /> */}
             <Select
           data={options}
           value={selectedValues[item.activity_id-1]}
@@ -72,8 +65,8 @@ export function ActivitySelectionTable({ data }) {
               [item.activity_id-1]: value,
             }));
           }}
+          withinPortal={true}
            />
-
         </td>
       </tr>
     );
@@ -81,7 +74,7 @@ export function ActivitySelectionTable({ data }) {
 
   return (
     <ScrollArea>
-      <Table miw={800} verticalSpacing="sm">
+      <Table miw={800} verticalSpacing="lg">
         <thead>
           <tr>
             <th style={{ width: rem(40) }}>
@@ -101,14 +94,16 @@ export function ActivitySelectionTable({ data }) {
 
         
       </Table>
-
-      <Space h='xl'/>
+      
+      <Divider my="sm" />
+      <Space h='sm' variant='dotted'/>
       <div style={{ textAlign: 'center' }}>
-        <Button>
-                Assign
+        <Button uppercase type='submit'>
+              Assign
         </Button>
       </div>
       
     </ScrollArea>
+    
   );
 }

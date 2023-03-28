@@ -46,7 +46,7 @@ function PatientProfile(){
             <Head>
                 <title>Patient Profile</title>
             </Head>
-            <Container>
+            <Container color>
                 <PatientCard patientData={patientData}/>
             </Container>
 
