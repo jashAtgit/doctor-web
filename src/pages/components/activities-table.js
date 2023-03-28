@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
 import { notifications } from '@mantine/notifications';
 import { createStyles, Table, Checkbox, ScrollArea, Group, Divider, Text, rem, Select, SelectItem, Button, Space, Paper } from '@mantine/core';
+import { pushAssignments } from '../services/assignment';
+import { IconCheck, IconX } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -19,13 +21,37 @@ const options = [
     { value: '5', label: 'Level 5' },
   ];
 
-function handleAssign(doctor_id, patient_id, selection, levels){
-  console.log(doctor_id);
-  console.log(patient_id);
-  console.log(levels);
-  console.log(selection);
+async function handleAssign(doctor_id, patient_id, selection, levels){
+  let json_list = [];
 
-  // build assignment list;
+  for(let i=0; i<selection.length; i++){
+    json_list.push({
+      patient_id: patient_id,
+      doctor_id: doctor_id,
+      item_id: selection[i],
+      item_level: levels[selection[i]],
+    });
+  }
+    console.log(json_list);
+
+    const response = await pushAssignments(json_list);
+    if(response.status === 200){
+      notifications.show({
+        color: 'blue',
+        title: 'Success',
+        message: 'Assigments have been pushed',
+        icon: <IconCheck size="1rem" />,
+      })
+    }
+    else{
+      notifications.show({
+        color: 'red',
+        title: 'Failed',
+        message: 'Please check inputs',
+        icon: <IconX size="1rem" />,
+      })
+    }
+
 }
 
 
@@ -110,7 +136,7 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
       <Divider my="sm" />
       <Space h='sm' variant='dotted'/>
       <div style={{ textAlign: 'center' }}>
-        <Button uppercase onClick={() => {
+        <Button uppercase onClick={(event) => {event.preventDefault();
           handleAssign(doctor_id, patient_id, selection, selectedValues)}}>
               Assign
         </Button>
