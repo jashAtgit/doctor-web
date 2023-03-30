@@ -10,7 +10,7 @@ export async function getAllActivities() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     },
-    }).then(response => response.data)
+    }).then(response => response.data.response)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";

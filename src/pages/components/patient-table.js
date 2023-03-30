@@ -10,19 +10,23 @@ import {
 } from "@tabler/icons-react"
 import Link from "next/link"
  
-export function PatientsTable({ data, doctor_id }) {
+export function PatientsTable({ data, userId}) {
+
+  console.log(data);
+  console.log(userId);
+  const doctor_id = userId;
 
   const rows = data.map(item => (
-    <tr key={item.patient_id}>
+    <tr key={item.userId}>
       <td>
         <Group spacing="sm">
           <IconUser size={40} />
           <div>
             <Text fz="sm" fw={500}>
-              {`${item.fname} ${item.lname}`}
+              {`${item.firstName} ${item.lastName}`}
             </Text>
             <Text fz="xs" c="dimmed">
-              {item.sex}
+              {item.gender}
             </Text>
           </div>
         </Group>
@@ -31,9 +35,9 @@ export function PatientsTable({ data, doctor_id }) {
       <td>
         {`${item.age} years`}
       </td>
-      <td>{item.sex}</td>
+      <td>{item.gender}</td>
       <td>
-        <Link href={{ pathname: '/patient-profile/', query: { patient_id: `${item.patient_id}`, doctor_id: doctor_id }}}>View Details</Link>
+        <Link href={{ pathname: '/patient-profile/', query: { patientId: `${item.userId}`, doctor_id: doctor_id }}}>View Details</Link>
       </td>
     </tr>
   ))
@@ -45,7 +49,7 @@ export function PatientsTable({ data, doctor_id }) {
           <tr>
             <th>Patient Name</th>
             <th>Age</th>
-            <th>Sex</th>
+            <th>Gender</th>
             <th>Options</th>
           </tr>
         </thead>

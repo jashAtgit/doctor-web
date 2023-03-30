@@ -15,7 +15,7 @@ function Dashboard({props}) {
   const setPassword = props.setPassword;
   const token = props.token;
 
-  const [doctor_id, setDoctorId] = useState();
+  const [userId, setUserId] = useState();
   const [patient_list, setPatientList] = useState([]);
 
 
@@ -23,16 +23,16 @@ function Dashboard({props}) {
     localStorage.removeItem('token');
   }
 
-
-
   //get data from backend required for dashbaord display
   useEffect( () => {
 
     async function fetchData() {
+      console.log("username in dashboard = " + email);
       const data = await getDocIdByEmail(email);
-      setDoctorId(data.doctor_id);
+      console.log(data);
+      setUserId(data.userId);
 
-      const patient_ids = await getPatientIdsByDocId(doctor_id);
+      const patient_ids = await getPatientIdsByDocId(data.userId);
 
       let demographicsData = [];
       for (const patientId of patient_ids) {
@@ -45,13 +45,13 @@ function Dashboard({props}) {
   }, []);
 
 
-  if(!patient_list || patient_list.length === 0){
+  if(!patient_list || patient_list === 'undefined' || patient_list.length === 0){
     return (
       <h1>Loading...</h1>
     )
   }
   
-
+  
   return (
     <AppShell
       padding="md"
@@ -60,9 +60,10 @@ function Dashboard({props}) {
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
     >
-      {<><PatientsTable data={patient_list} doctor_id={doctor_id} /> </>}
+      {<><PatientsTable data={patient_list} userId={userId} /> </>}
     </AppShell>
   );
+  
 }
 
 export default Dashboard;

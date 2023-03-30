@@ -52,6 +52,7 @@ function Login({props})  {
           role,
         });
         if(token == 'error'){
+          console.log("inside error");
             return <Login setToken={setToken}/>
         }
         setToken(token['token']);

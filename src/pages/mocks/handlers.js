@@ -23,7 +23,7 @@ export const handlers = [
         return res(
             ctx.status(200),
             ctx.json({
-                doctor_id: 3,
+                doctorId: 2,
             })
         )
     }),
@@ -47,7 +47,7 @@ export const handlers = [
     }),
 
     //loginDoctor
-    rest.post('/doctors/login', (req, res, ctx) => {
+    rest.post('/users/login', (req, res, ctx) => {
 
         return res(
             ctx.status(200),

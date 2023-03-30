@@ -6,14 +6,17 @@ import { useEffect, useState } from "react";
 import { getPatientMedHist} from "./services/patient";
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import Axios from "axios";
 
 function PatientProfile(){
 
     const router = useRouter();
 
     const [medData, setMedData] = useState();
-    const [patient_id, setPatientId] = useState();
-    let {_, doctor_id} = router.query;
+    const [patientId, setPatientId] = useState();
+    let doctor_id = router.query.doctor_id;
+
+    Axios.defaults.baseURL = "https://a5c6-119-161-98-68.in.ngrok.io";
 
     //get patient details - (medical and all) and display on this page
     useEffect(() => {
@@ -21,28 +24,29 @@ function PatientProfile(){
         // const { worker } = require('./mocks/browser')
         // worker.start();
         
-        async function fetchData(patient_id){
-            const medData = await getPatientMedHist(patient_id);
+        async function fetchData(patientId){
+            const medData = await getPatientMedHist(patientId);
+            console.log(medData);
             setMedData(medData);
         }
 
         
-        const {patient_id, doctor_id} = router.query;
-        setPatientId(patient_id);
-        
-        fetchData(patient_id);
+        setPatientId(router.query.patientId);
+        console.log("patient id in useEff = " + router.query.patientId);
+        fetchData(router.query.patientId);
+        console.log(medData);
 
     }, [router.query])
 
     const patientData = {
-        pid: patient_id,
+        // pid: patientId,
         doctor_id,
         ...medData,
     };
 
     
 
-    if(!medData || medData === 'undefined'){
+    if(!medData || medData == 'undefined'){
         return <h1> Loading....</h1>
     }
     

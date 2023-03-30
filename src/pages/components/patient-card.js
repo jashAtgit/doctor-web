@@ -9,15 +9,17 @@ import { ActivitySelectionTable } from './activities-table';
 
 export function PatientCard({patientData}) {
 
-  const { patient_id, doctor_id, ...medData} = patientData;
+  const {doctor_id, ...medData} = patientData;
   const [demographicsData, setDemographicData] = useState();
   const [activities, setActivities] = useState();
 
+  console.log("doctor id in patient card = " + doctor_id);
   
 
   useEffect(() => {
     async function fetchData(patient_id){
       const demographics = await getPatientDemographics(patient_id);
+      console.log(demographics);
       setDemographicData(demographics);
 
       const activities = await getAllActivities();
@@ -25,9 +27,9 @@ export function PatientCard({patientData}) {
 
     }
 
-    fetchData(patient_id);
+    fetchData(medData.id);
     
-  }, [patient_id])
+  }, [medData.id])
 
 
   if(!activities || activities === 'undefined'){
@@ -51,13 +53,13 @@ export function PatientCard({patientData}) {
         </div>
       
       <Text ta="center" fz="lg" weight={500} mt="md">
-        {`${demographicsData.fname} ${demographicsData.lname}`}
+        {`${demographicsData.firstName} ${demographicsData.lastName}`}
       </Text>
       <Text ta="center" c="dimmed" fz="sm">
-        {`${demographicsData.age} years • ${demographicsData.sex}`}
+        {`${demographicsData.age} years • ${demographicsData.gender}`}
       </Text>
       <Text ta="center" c="dimmed" fz="sm">
-        {`User-Id : ${patient_id}`}
+        {`User-Id : ${medData.id}`}
       </Text>
       
 
@@ -94,8 +96,8 @@ export function PatientCard({patientData}) {
               <Text fz="md"> {<IconWeight/>}</Text>
               {medData.weight} Kg
               </div>
-              <Text fz="md"> {medData.is_smoker ? <IconSmoking/> : <IconSmokingNo/>}</Text>
-              <Text fz="md"> {medData.drinks_alcohol ? <IconBeer/> : <IconBeerOff/>} </Text>
+              <Text fz="md"> {medData.smoker ? <IconSmoking/> : <IconSmokingNo/>}</Text>
+              <Text fz="md"> {medData.drinksAlcohol ? <IconBeer/> : <IconBeerOff/>} </Text>
             </Flex>
 
       </Paper>
@@ -113,7 +115,7 @@ export function PatientCard({patientData}) {
         >
           <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Push Activities</Title>  
           <Divider my="sm" />
-          <ActivitySelectionTable data={activities} doctor_id={doctor_id} patient_id={patient_id}/>
+          <ActivitySelectionTable data={activities} doctor_id={doctor_id} patient_id={medData.id}/>
         </Paper>
     </Paper>
 

@@ -35,7 +35,7 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
     console.log(json_list);
 
     const response = await pushAssignments(json_list);
-    if(response.status === 200){
+    if(response === true){
       notifications.show({
         color: 'blue',
         title: 'Success',
@@ -57,31 +57,35 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
 
 export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
 
-  //using hashTable to map <activity_id : value choice>
+  console.log(data);
+  console.log("doctor id = " + doctor_id);
+  console.log("patient id = " + patient_id);
+
+  //using hashTable to map <activityId : value choice>
   const [selectedValues, setSelectedValues] = useState(
-    data.reduce((obj, item) => ({ ...obj, [item.activity_id]: options[0].value }), {})
+    data.reduce((obj, item) => ({ ...obj, [item.activityId]: options[0].value }), {})
   );
 
   const { classes, cx } = useStyles();
   const [selection, setSelection] = useState([]);
-  const toggleRow = (activity_id) =>
+  const toggleRow = (activityId) =>
     setSelection((current) =>
-      current.includes(activity_id) ? current.filter((item) => item !== activity_id) : [...current, activity_id]
+      current.includes(activityId) ? current.filter((item) => item !== activityId) : [...current, activityId]
     );
   const toggleAll = () =>
-    setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.activity_id)));
+    setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.activityId)));
 
   const rows = data.map((item) => {
-    const selected = selection.includes(item.activity_id);
+    const selected = selection.includes(item.activityId);
 
     // console.log(selectedValues);
    
     return (
-      <tr key={item.activity_id} className={cx({ [classes.rowSelected]: selected })}>
+      <tr key={item.activityId} className={cx({ [classes.rowSelected]: selected })}>
         <td>
           <Checkbox
-            checked={selection.includes(item.activity_id)}
-            onChange={() => toggleRow(item.activity_id)}
+            checked={selection.includes(item.activityId)}
+            onChange={() => toggleRow(item.activityId)}
             transitionDuration={0}
           />
         </td>
@@ -96,11 +100,11 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
         <td>
             <Select
           data={options}
-          value={selectedValues[item.activity_id]}
+          value={selectedValues[item.activityId]}
           onChange={(value) => {
             setSelectedValues((current) => ({
               ...current,
-              [item.activity_id]: value,
+              [item.activityId]: value,
             }));
           }}
           withinPortal={true}

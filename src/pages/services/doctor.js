@@ -4,14 +4,14 @@ export async function getDocIdByEmail(username) {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     //get doctor using username
-    console.log("inside service");
-    const response = axios.get(`/doctors/${username}`,
+    console.log(username);
+    const response = axios.get(`/users/${username}`,
     {
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     },
-    }).then(response => response.data)
+    }).then(response => response.data.response)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";
@@ -22,14 +22,12 @@ export async function getDocIdByEmail(username) {
 
 export async function loginDoctor(credentials) {
     
-    const response = axios.post('/doctors/login', {
-    validateStatus:false,
+    const response = await axios.post('/users/login', credentials, {
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     },
-    body: JSON.stringify(credentials)
     })
-    .then(response => response.data)
+    .then(response => response.data.response)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";
@@ -48,7 +46,7 @@ export async function getPatientIdsByDocId(doc_id) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     },
-    }).then(response => response.data)
+    }).then(response => response.data.response)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";

@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 export default function App(props) {
   const { Component, pageProps } = props;
 
-  useEffect(() => {
-    const { worker } = require('./mocks/browser')
+  // useEffect(() => {
+  //   const { worker } = require('./mocks/browser')
   
-    worker.start()
-    }, []);
+  //   worker.start()
+  //   }, []);
 
   return (
     <>
