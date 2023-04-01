@@ -1,4 +1,4 @@
-import { AppShell, Navbar, Header, em } from '@mantine/core';
+import { AppShell, Navbar, LoadingOverlay } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 function Dashboard({props}) {
 
   const setToken = props.setToken;
-  const email = props.email;
+  const email = props.email || localStorage.getItem('email');
   const password = props.password;
   const setPassword = props.setPassword;
   const token = props.token;
@@ -47,7 +47,7 @@ function Dashboard({props}) {
 
   if(!patient_list || patient_list === 'undefined' || patient_list.length === 0){
     return (
-      <h1>Loading...</h1>
+      <LoadingOverlay visible={true} overlayBlur={2} />
     )
   }
   

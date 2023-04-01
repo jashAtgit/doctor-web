@@ -1,4 +1,4 @@
-import { Text, Button, Paper, Space, Title, Flex, Divider} from '@mantine/core';
+import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay} from '@mantine/core';
 import { IconUser, IconSmoking, IconSmokingNo, IconBeer, IconBeerOff,  IconRulerMeasure, IconWeight } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { getAllActivities } from '../services/item';
@@ -34,7 +34,7 @@ export function PatientCard({patientData}) {
 
   if(!activities || activities === 'undefined'){
     return (
-      <h1>Loading....</h1>
+      <LoadingOverlay visible={true} overlayBlur={2} />
     )
   }
 

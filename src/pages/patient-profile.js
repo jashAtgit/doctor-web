@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Card, Text, Container, Space } from "@mantine/core";
+import { Container, Space , LoadingOverlay} from "@mantine/core";
 import { PatientCard } from "./components/patient-card";
 import { useEffect, useState } from "react";
 import { getPatientMedHist} from "./services/patient";
@@ -16,7 +16,7 @@ function PatientProfile(){
     const [patientId, setPatientId] = useState();
     let doctor_id = router.query.doctor_id;
 
-    Axios.defaults.baseURL = "https://a5c6-119-161-98-68.in.ngrok.io";
+    Axios.defaults.baseURL = "http://localhost:8888";
 
     //get patient details - (medical and all) and display on this page
     useEffect(() => {
@@ -47,7 +47,9 @@ function PatientProfile(){
     
 
     if(!medData || medData == 'undefined'){
-        return <h1> Loading....</h1>
+        return (
+            <LoadingOverlay visible={true} overlayBlur={2} /> 
+        );
     }
     
     return (

@@ -56,6 +56,7 @@ function Login({props})  {
             return <Login setToken={setToken}/>
         }
         setToken(token['token']);
+        localStorage.setItem('email', email)
       }
 
       return (
