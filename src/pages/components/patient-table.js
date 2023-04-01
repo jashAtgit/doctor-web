@@ -12,8 +12,6 @@ import Link from "next/link"
  
 export function PatientsTable({ data, userId}) {
 
-  console.log(data);
-  console.log(userId);
   const doctor_id = userId;
 
   const rows = data.map(item => (

@@ -5,28 +5,22 @@ import { getAllActivities } from '../services/item';
 import { getPatientDemographics } from '../services/patient';
 import { ActivitySelectionTable } from './activities-table';
 
-
-
 export function PatientCard({patientData}) {
 
   const {doctor_id, ...medData} = patientData;
   const [demographicsData, setDemographicData] = useState();
   const [activities, setActivities] = useState();
 
-  console.log("doctor id in patient card = " + doctor_id);
-  
 
   useEffect(() => {
     async function fetchData(patient_id){
       const demographics = await getPatientDemographics(patient_id);
-      console.log(demographics);
       setDemographicData(demographics);
 
       const activities = await getAllActivities();
       setActivities(activities);
 
     }
-
     fetchData(medData.id);
     
   }, [medData.id])
@@ -47,7 +41,7 @@ export function PatientCard({patientData}) {
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
       })}
-    >
+    >   
         <div style={{ textAlign: 'center' }}>
             <IconUser size={50} radius={10} />
         </div>
@@ -98,8 +92,13 @@ export function PatientCard({patientData}) {
               </div>
               <Text fz="md"> {medData.smoker ? <IconSmoking/> : <IconSmokingNo/>}</Text>
               <Text fz="md"> {medData.drinksAlcohol ? <IconBeer/> : <IconBeerOff/>} </Text>
+              
+              
             </Flex>
-
+            <div style={{display: "flex", justifyContent: "center"}}>
+              <Text fz="md" fw={700} >Disease History:</Text> <Space w="md"/><Text fz="md"> {medData.diseases}</Text>
+              </div>
+            <Space h="sm"/>
       </Paper>
 
     <Space h="xl"/>

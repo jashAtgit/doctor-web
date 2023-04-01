@@ -4,11 +4,16 @@ import { Container, Space , LoadingOverlay} from "@mantine/core";
 import { PatientCard } from "./components/patient-card";
 import { useEffect, useState } from "react";
 import { getPatientMedHist} from "./services/patient";
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, ColorSchemeProvider, } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import Axios from "axios";
+import { DarkToggle } from "./components/darkToggle";
+"use strict";
+
 
 function PatientProfile(){
+    const [colorScheme, setColorScheme] = useState('light');
+    const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
     const router = useRouter();
 
@@ -26,15 +31,12 @@ function PatientProfile(){
         
         async function fetchData(patientId){
             const medData = await getPatientMedHist(patientId);
-            console.log(medData);
             setMedData(medData);
         }
 
         
         setPatientId(router.query.patientId);
-        console.log("patient id in useEff = " + router.query.patientId);
         fetchData(router.query.patientId);
-        console.log(medData);
 
     }, [router.query])
 
@@ -54,17 +56,23 @@ function PatientProfile(){
     
     return (
         <>
-            <MantineProvider withNormalizeCSS withGlobalStyles>
+            <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+            <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
             <Notifications />
       
             <Space h="md" />
             <Head>
                 <title>Patient Profile</title>
             </Head>
+            
             <Container>
+                <div style={{ textAlign: 'right' }}>
+                    <DarkToggle/>
+                </div>
                 <PatientCard patientData={patientData}/>
             </Container>
             </MantineProvider>
+            </ColorSchemeProvider>
         
         </>
     );

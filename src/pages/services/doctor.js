@@ -4,7 +4,6 @@ export async function getDocIdByEmail(username) {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     //get doctor using username
-    console.log(username);
     const response = axios.get(`/users/${username}`,
     {
     headers: {

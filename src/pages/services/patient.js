@@ -42,7 +42,6 @@ export async function getPatientMedHist(patient_id) {
     // get patient's medical history by patient_id
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-    console.log("patient id= " + patient_id);
     const response = axios.get(`/patients/${patient_id}/medical-history`,
     {
     headers: {

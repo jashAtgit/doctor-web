@@ -25,7 +25,6 @@ function App(){
         setIsAuthenticated(false);
     }
     else{
-      console.log("user is authenticated");
       setIsAuthenticated(true);
     }
   }, [token]);

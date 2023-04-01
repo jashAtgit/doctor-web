@@ -27,9 +27,7 @@ function Dashboard({props}) {
   useEffect( () => {
 
     async function fetchData() {
-      console.log("username in dashboard = " + email);
       const data = await getDocIdByEmail(email);
-      console.log(data);
       setUserId(data.userId);
 
       const patient_ids = await getPatientIdsByDocId(data.userId);

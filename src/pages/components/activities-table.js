@@ -57,10 +57,6 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
 
 export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
 
-  console.log(data);
-  console.log("doctor id = " + doctor_id);
-  console.log("patient id = " + patient_id);
-
   //using hashTable to map <activityId : value choice>
   const [selectedValues, setSelectedValues] = useState(
     data.reduce((obj, item) => ({ ...obj, [item.activityId]: options[0].value }), {})
