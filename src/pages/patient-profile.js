@@ -21,7 +21,7 @@ function PatientProfile(){
     const [patientId, setPatientId] = useState();
     let doctor_id = router.query.doctor_id;
 
-    Axios.defaults.baseURL = "http://localhost:8888";
+    Axios.defaults.baseURL = "https://7c61-103-156-19-229.in.ngrok.io/";
 
     //get patient details - (medical and all) and display on this page
     useEffect(() => {

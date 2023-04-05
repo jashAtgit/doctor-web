@@ -7,7 +7,7 @@ import Axios from "axios";
 
 function Home() {
 
-  Axios.defaults.baseURL = "http://localhost:8888";
+  Axios.defaults.baseURL = "https://7c61-103-156-19-229.in.ngrok.io/";
   
   return (
     <>

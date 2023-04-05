@@ -21,12 +21,12 @@ export async function getDocIdByEmail(username) {
 
 export async function loginDoctor(credentials) {
     
-    const response = await axios.post('/users/login', credentials, {
+    const response = await axios.post('/auth/login', credentials, {
     headers: {
         'Content-Type': 'application/json',
     },
     })
-    .then(response => response.data.response)
+    .then(response => response.data)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";
