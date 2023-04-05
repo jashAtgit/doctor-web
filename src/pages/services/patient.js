@@ -20,7 +20,7 @@ export async function getPatientMood(patient_id) {
 }
 
 // get pateint's demographics data using pateint id
-export async function getPatientDemographics(patient_id) {
+export async function getDemographics(patient_id) {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const response = axios.get(`/users/${patient_id}/demographics`,

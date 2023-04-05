@@ -1,32 +1,40 @@
-import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay, Modal} from '@mantine/core';
 import { IconUser, IconSmoking, IconSmokingNo, IconBeer, IconBeerOff,  IconRulerMeasure, IconWeight } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { getAllActivities } from '../services/item';
-import { getPatientDemographics } from '../services/patient';
+import { getDemographics } from '../services/patient';
 import { ActivitySelectionTable } from './activities-table';
+import Chat from './Chat';
 
 export function PatientCard({patientData}) {
 
   const {doctor_id, ...medData} = patientData;
   const [demographicsData, setDemographicData] = useState();
   const [activities, setActivities] = useState();
+  const [docName, setDocName] = useState();
+
+  const [opened, { open, close }] = useDisclosure(false);
+
 
 
   useEffect(() => {
-    async function fetchData(patient_id){
-      const demographics = await getPatientDemographics(patient_id);
+    async function fetchData(patient_id, doctorId){
+      const demographics = await getDemographics(patient_id);
       setDemographicData(demographics);
 
       const activities = await getAllActivities();
       setActivities(activities);
 
+      const docDemographics = await getDemographics(doctorId);
+      setDocName(docDemographics.firstName + " " + docDemographics.lastName);
+      
     }
-    fetchData(medData.id);
+    fetchData(medData.id, doctor_id);
     
   }, [medData.id])
 
-
-  if(!activities || activities === 'undefined'){
+  if(!docName || docName === undefined){
     return (
       <LoadingOverlay visible={true} overlayBlur={2} />
     )
@@ -36,7 +44,8 @@ export function PatientCard({patientData}) {
   return (
     <Paper
       radius="xl"
-      // shadow="xl"
+      shadow="xl"
+      withBorder
       p="lg"
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
@@ -56,8 +65,15 @@ export function PatientCard({patientData}) {
         {`User-Id : ${medData.id}`}
       </Text>
       
+      <Modal opened={opened} onClose={close} title="Have a Chat..." centered
+      overlayProps={{
+        blur: 3,
+      }}
+      >
+        <Chat patientId={medData.id} doctorId={doctor_id} patientName={`${demographicsData.firstName} ${demographicsData.lastName}`} docName={docName}/>
+      </Modal>
 
-      <Button variant="default" fullWidth mt="md" radius="xl" shadow="sm">
+      <Button onClick={open} variant="default" fullWidth mt="md" radius="xl" shadow="sm">
         Send message
       </Button>
 
