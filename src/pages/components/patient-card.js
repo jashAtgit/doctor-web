@@ -43,10 +43,10 @@ export function PatientCard({patientData}) {
 
   return (
     <Paper
-      radius="xl"
+      radius={0}
       shadow="xl"
       withBorder
-      p="lg"
+      p="xl"
       sx={(theme) => ({
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
       })}
@@ -79,7 +79,7 @@ export function PatientCard({patientData}) {
 
       <Space h="xl" />
       <Paper
-      radius="xl"
+      radius={0}
       shadow="sm"
       withBorder
       p="lg"
@@ -119,7 +119,7 @@ export function PatientCard({patientData}) {
 
     <Space h="xl"/>
       <Paper      
-        radius="xl"
+        radius={0}
         withBorder
         p="lg"
         shadow="xl"

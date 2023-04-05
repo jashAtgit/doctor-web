@@ -4,24 +4,19 @@ import { Container, Space , LoadingOverlay} from "@mantine/core";
 import { PatientCard } from "./components/patient-card";
 import { useEffect, useState } from "react";
 import { getPatientMedHist} from "./services/patient";
-import { MantineProvider, ColorSchemeProvider, } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import Axios from "axios";
-import { DarkToggle } from "./components/darkToggle";
 "use strict";
 
 
 function PatientProfile(){
-    const [colorScheme, setColorScheme] = useState('light');
-    const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-
     const router = useRouter();
 
     const [medData, setMedData] = useState();
     const [patientId, setPatientId] = useState();
     let doctor_id = router.query.doctor_id;
 
-    Axios.defaults.baseURL = "http://localhost:8888/";
+    Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_ADDR;
 
     //get patient details - (medical and all) and display on this page
     useEffect(() => {
@@ -41,7 +36,6 @@ function PatientProfile(){
     }, [router.query])
 
     const patientData = {
-        // pid: patientId,
         doctor_id,
         ...medData,
     };
@@ -55,26 +49,19 @@ function PatientProfile(){
     }
     
     return (
-        <>
-            <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-            <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+        <div style={{backgroundColor: '#edede9' }}>  
             <Notifications />
-      
-            <Space h="md" />
-            <Head>
-                <title>Patient Profile</title>
-            </Head>
             
-            <Container>
-                <div style={{ textAlign: 'right' }}>
-                    <DarkToggle/>
-                </div>
-                <PatientCard patientData={patientData}/>
-            </Container>
-            </MantineProvider>
-            </ColorSchemeProvider>
-        
-        </>
+                <Space h="lg" />
+                <Head>
+                    <title>Patient Profile</title>
+                </Head>
+                
+                <Container>
+                    <PatientCard patientData={patientData}/>
+                </Container>
+        </div>
+                
     );
     
 }

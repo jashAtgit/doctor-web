@@ -133,7 +133,7 @@ function NavBarSimple({clearToken, setToken}) {
 
   return (
     
-    <Navbar  width={{sm:300}} p="md" className={classes.navbar}>
+    <Navbar  width={{sm:250}} p="md" className={classes.navbar}>
       <Navbar.Section grow>
       <Group className={classes.header} position="apart">
           <IconActivityHeartbeat size={30} color={'white'}/>

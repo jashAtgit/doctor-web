@@ -6,7 +6,7 @@ import Axios from "axios";
 
 function Home() {
 
-  Axios.defaults.baseURL = "http://localhost:8888/";
+  Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_ADDR;
   
   return (
     <>

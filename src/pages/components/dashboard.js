@@ -11,9 +11,6 @@ function Dashboard({props}) {
 
   const setToken = props.setToken;
   const email = props.email || localStorage.getItem('email');
-  const password = props.password;
-  const setPassword = props.setPassword;
-  const token = props.token;
 
   const [userId, setUserId] = useState();
   const [patient_list, setPatientList] = useState([]);
@@ -53,7 +50,7 @@ function Dashboard({props}) {
   return (
     <AppShell
       padding="md"
-      navbar={<Navbar width={{ base: 300 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken}   />}</Navbar>}
+      navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken}   />}</Navbar>}
       styles={(theme) => ({
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
