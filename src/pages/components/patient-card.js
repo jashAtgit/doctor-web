@@ -3,9 +3,10 @@ import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay, Modal
 import { IconUser, IconSmoking, IconSmokingNo, IconBeer, IconBeerOff,  IconRulerMeasure, IconWeight } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { getAllActivities } from '../services/item';
-import { getDemographics } from '../services/patient';
+import { getDemographics, getPatientActivities } from '../services/patient';
 import { ActivitySelectionTable } from './activities-table';
 import Chat from './Chat';
+import { AssignmentsTable } from './AssignmentsTable';
 
 export function PatientCard({patientData}) {
 
@@ -15,6 +16,8 @@ export function PatientCard({patientData}) {
   const [docName, setDocName] = useState();
 
   const [opened, { open, close }] = useDisclosure(false);
+
+  const [assginedActivies, setAssignedActivities] = useState([]);
 
 
 
@@ -28,11 +31,22 @@ export function PatientCard({patientData}) {
 
       const docDemographics = await getDemographics(doctorId);
       setDocName(docDemographics.firstName + " " + docDemographics.lastName);
+
+      
       
     }
     fetchData(medData.id, doctor_id);
     
   }, [medData.id])
+
+  useEffect(() => {
+    async function getAssignedActivities(patient_id){
+      const assginedActivies_ = await getPatientActivities(patient_id);
+      setAssignedActivities(assginedActivies_);
+    }
+
+    getAssignedActivities(medData.id);
+  }, [])
 
   if(!docName || docName === undefined){
     return (
@@ -132,6 +146,29 @@ export function PatientCard({patientData}) {
           <Divider my="sm" />
           <ActivitySelectionTable data={activities} doctor_id={doctor_id} patient_id={medData.id}/>
         </Paper>
+        
+        {assginedActivies.length !== 0 ? 
+         <>
+         <Space h="xl"/>
+         <Paper      
+          radius={0}
+          withBorder
+          p="lg"
+          shadow="xl"
+          sx={(theme) => ({
+            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+          })}
+        
+          >
+            <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Assigned Activities</Title>  
+            <Divider my="sm" />
+            <AssignmentsTable data={assginedActivies} />
+          </Paper> 
+          </>
+          : null}
+          
+        
+        
     </Paper>
 
 

@@ -2,7 +2,7 @@ import { AppShell, Navbar, LoadingOverlay } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
-import { getDemographics } from '../services/patient';
+import { getDemographics, getPatientMood } from '../services/patient';
 import { getPatientIdsByDocId, getDocIdByEmail } from '../services/doctor';
 import { useEffect, useState } from 'react';
 
@@ -32,6 +32,8 @@ function Dashboard({props}) {
       let demographicsData = [];
       for (const patientId of patient_ids) {
         const patientDemographics = await getDemographics(patientId);
+        // const mood = await getPatientMood(patientId);
+        // patientDemographics['mood'] = mood;
         demographicsData.push(patientDemographics);
       }
       setPatientList(demographicsData);

@@ -10,13 +10,13 @@ export async function getPatientMood(patient_id) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     },
-    }).then(response => response.data)
+    }).then(response => response.data.response)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";
 
     });
-    return response.response
+    return response
 }
 
 // get pateint's demographics data using pateint id
@@ -52,6 +52,26 @@ export async function getPatientMedHist(patient_id) {
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error hai";
+
+    });
+    return response
+}
+
+// get all activities assigned to patient with given ID
+export async function getPatientActivities(patientId) {
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    //get all available activities
+    const response = axios.get(`/patients/${patientId}/assignments`,
+    {
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    },
+    }).then(response => response.data.response)
+    .catch(err => {
+        console.log("error code : " + err.response.status);
+        return "error";
 
     });
     return response

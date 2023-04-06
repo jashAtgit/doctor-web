@@ -92,7 +92,7 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
             </Text>
           </Group>
         </td>
-        <td>{item.desc}</td>
+        <td>{item.description}</td>
         <td>
             <Select
           data={options}
