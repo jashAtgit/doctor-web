@@ -54,3 +54,22 @@ export async function getPatientIdsByDocId(doc_id) {
 
     return response
 }
+
+export async function getDoctorDetails(userId) {
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    //get doctor using username
+    const response = axios.get(`/doctors/${userId}/doctor-details`,
+    {
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    },
+    }).then(response => response.data.response)
+    .catch(err => {
+        console.log("error code : " + err.response.status);
+        return "error";
+
+    });
+    return response
+}

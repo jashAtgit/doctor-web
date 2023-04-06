@@ -20,23 +20,7 @@ export async function getPatientMood(patient_id) {
 }
 
 // get pateint's demographics data using pateint id
-export async function getDemographics(patient_id) {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-    const response = axios.get(`/users/${patient_id}/demographics`,
-    {
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    },
-    }).then(response => response.data.response)
-    .catch(err => {
-        console.log("error code : " + err.response.status);
-        return "error";
-
-    });
-    return response
-}
 
 export async function getPatientMedHist(patient_id) {
     // get patient's medical history by patient_id

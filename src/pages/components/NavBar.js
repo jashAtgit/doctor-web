@@ -14,9 +14,7 @@ import {
   IconLogout,
   IconUsers,
   IconActivityHeartbeat,
-  IconBandage,
 } from "@tabler/icons-react"
-import Home from "..";
 
 
 const useStyles = createStyles(theme => ({
@@ -99,20 +97,15 @@ const useStyles = createStyles(theme => ({
 }))
 
 const data = [
-  // { link: "", label: "Notifications", icon: IconBellRinging },
   { link: "", label: "Patients", icon: IconUsers },
-  // { link: "", label: "Security", icon: IconFingerprint },
-  // { link: "", label: "SSH Keys", icon: IconKey },
-  // { link: "", label: "Databases", icon: IconDatabaseImport },
-  // { link: "", label: "Authentication", icon: Icon2fa },
-  { link: "", label: "Other Settings", icon: IconSettings }
+  { link: "", label: "My Profile", icon: IconSettings }
 ]
 
-function NavBarSimple({clearToken, setToken}) {
+function NavBarSimple({clearToken, setToken, active, setActive}) {
 
 
   const { classes, cx } = useStyles()
-  const [active, setActive] = useState("Patients")
+  
 
   const links = data.map(item => (
     <a

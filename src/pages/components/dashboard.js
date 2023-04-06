@@ -2,9 +2,11 @@ import { AppShell, Navbar, LoadingOverlay } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
-import { getDemographics, getPatientMood } from '../services/patient';
+import { getPatientMood } from '../services/patient';
+import { getDemographics } from '../services/user';
 import { getPatientIdsByDocId, getDocIdByEmail } from '../services/doctor';
 import { useEffect, useState } from 'react';
+import { DoctorProfile } from './DoctorProfile';
 
 
 function Dashboard({props}) {
@@ -14,6 +16,7 @@ function Dashboard({props}) {
 
   const [userId, setUserId] = useState();
   const [patient_list, setPatientList] = useState([]);
+  const [active, setActive] = useState("Patients")
 
 
   function clearToken(){
@@ -41,6 +44,7 @@ function Dashboard({props}) {
     fetchData();
   }, []);
 
+  console.log(email);
 
   if(!patient_list || patient_list === 'undefined' || patient_list.length === 0){
     return (
@@ -52,12 +56,14 @@ function Dashboard({props}) {
   return (
     <AppShell
       padding="md"
-      navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken}   />}</Navbar>}
+      navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken} active={active} setActive={setActive}  />}</Navbar>}
       styles={(theme) => ({
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
     >
-      {<><PatientsTable data={patient_list} userId={userId} /> </>}
+      {<>
+       {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> : <DoctorProfile userId={userId} email={email}/> }
+       </>}
     </AppShell>
   );
   

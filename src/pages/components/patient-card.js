@@ -3,7 +3,8 @@ import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay, Modal
 import { IconUser, IconSmoking, IconSmokingNo, IconBeer, IconBeerOff,  IconRulerMeasure, IconWeight } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { getAllActivities } from '../services/item';
-import { getDemographics, getPatientActivities } from '../services/patient';
+import {getPatientActivities } from '../services/patient';
+import { getDemographics } from '../services/user';
 import { ActivitySelectionTable } from './activities-table';
 import Chat from './Chat';
 import { AssignmentsTable } from './AssignmentsTable';
