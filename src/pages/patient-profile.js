@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Container, Space , LoadingOverlay} from "@mantine/core";
+import { Container, Space , LoadingOverlay, BackgroundImage} from "@mantine/core";
 import { PatientCard } from "./components/patient-card";
 import { useEffect, useState } from "react";
 import { getPatientMedHist} from "./services/patient";
@@ -21,14 +21,10 @@ function PatientProfile(){
     //get patient details - (medical and all) and display on this page
     useEffect(() => {
 
-        // const { worker } = require('./mocks/browser')
-        // worker.start();
-        
         async function fetchData(patientId){
             const medData = await getPatientMedHist(patientId);
             setMedData(medData);
         }
-
         
         setPatientId(router.query.patientId);
         fetchData(router.query.patientId);
@@ -39,7 +35,6 @@ function PatientProfile(){
         doctor_id,
         ...medData,
     };
-
     
 
     if(!medData || medData == 'undefined'){
@@ -49,9 +44,8 @@ function PatientProfile(){
     }
     
     return (
-        <div style={{backgroundColor: '#edede9' }}>  
+        <div style={{backgroundColor: '#edede9'}}>  
             <Notifications />
-            
                 <Space h="lg" />
                 <Head>
                     <title>Patient Profile</title>

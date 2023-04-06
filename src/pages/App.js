@@ -38,7 +38,9 @@ function App(){
     )
   }
   else{
-    return <Login props={login_data}/>
+    return (
+    <Login props={login_data}/>
+    );
   }
   
 }

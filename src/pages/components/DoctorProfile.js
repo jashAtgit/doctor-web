@@ -67,7 +67,7 @@ import { getDoctorDetails } from "../services/doctor"
           {demographics.firstName + " " + demographics.lastName}
         </Text>
         <Text ta="center" fz="sm" c="dimmed">
-          {email} 
+          {`${email} • ${demographics.age} years`} 
         </Text>
         <Group mt="md" position="center" spacing={30}>
             <div>
