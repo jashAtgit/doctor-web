@@ -9,10 +9,10 @@ import {
   IconUser,
   IconMoodHappy,
   IconMoodSmileBeam,
-  IconMoodEmpty,
   IconMoodConfuzed,
   IconMoodSad,
   IconMoodCry,
+  IconMoodNervous,
 } from "@tabler/icons-react"
 import Link from "next/link"
  
@@ -42,9 +42,9 @@ export function PatientsTable({ data, userId}) {
       <td>{item.gender}</td>
       <td>{item.moods != undefined  && item.moods.length > 0 && (
         item.moods[item.moods.length-1].moodValue === 1 ? <IconMoodCry/> :
-        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodSad/> :
-        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodConfuzed/> :
-        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodEmpty/> :
+        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodNervous/>:
+        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodSad/> :
+        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodConfuzed/>  :
         item.moods[item.moods.length-1].moodValue === 5 ? <IconMoodSmileBeam/> :
         <IconMoodHappy/> 
       )}
