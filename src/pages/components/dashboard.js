@@ -2,7 +2,7 @@ import { AppShell, Navbar, LoadingOverlay } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
-import { getPatientMood } from '../services/patient';
+import { getPatientMood, getPatientMoods } from '../services/patient';
 import { getDemographics } from '../services/user';
 import { getPatientIdsByDocId, getDocIdByEmail } from '../services/doctor';
 import { useEffect, useState } from 'react';
@@ -35,8 +35,9 @@ function Dashboard({props}) {
       let demographicsData = [];
       for (const patientId of patient_ids) {
         const patientDemographics = await getDemographics(patientId);
-        // const mood = await getPatientMood(patientId);
-        // patientDemographics['mood'] = mood;
+        const moods = await getPatientMoods(patientId);
+        if(moods != 'error')
+          patientDemographics['moods'] = moods;
         demographicsData.push(patientDemographics);
       }
       setPatientList(demographicsData);
@@ -44,7 +45,6 @@ function Dashboard({props}) {
     fetchData();
   }, []);
 
-  console.log(email);
 
   if(!patient_list || patient_list === 'undefined' || patient_list.length === 0){
     return (

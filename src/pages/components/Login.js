@@ -53,7 +53,13 @@ function Login({props})  {
         });
         if(token == 'error'){
           console.log("inside error");
-            return <Login setToken={setToken}/>
+          notifications.show({
+            title: "Login failed",
+            message: "Please enter valid credentials",
+            color: 'red',
+          });
+          
+          return <Login setToken={setToken}/>
         }
         setToken(token['token']);
         localStorage.setItem('email', email)

@@ -15,8 +15,16 @@ function PatientProfile(){
     const [medData, setMedData] = useState();
     const [patientId, setPatientId] = useState();
     let doctor_id = router.query.doctor_id;
+    
 
     Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_ADDR;
+
+
+    useEffect(() => {
+        if (router.query.patientId) {
+            setPatientId(router.query.patientId);
+        }
+    }, [router.query.patientId]);
 
     //get patient details - (medical and all) and display on this page
     useEffect(() => {
@@ -26,10 +34,11 @@ function PatientProfile(){
             setMedData(medData);
         }
         
-        setPatientId(router.query.patientId);
-        fetchData(router.query.patientId);
+        if (patientId) {
+            fetchData(patientId);
+        }
 
-    }, [router.query])
+    }, [patientId])
 
     const patientData = {
         doctor_id,

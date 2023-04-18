@@ -7,6 +7,12 @@ import {
 
 import {
   IconUser,
+  IconMoodHappy,
+  IconMoodSmileBeam,
+  IconMoodEmpty,
+  IconMoodConfuzed,
+  IconMoodSad,
+  IconMoodCry,
 } from "@tabler/icons-react"
 import Link from "next/link"
  
@@ -34,8 +40,19 @@ export function PatientsTable({ data, userId}) {
         {`${item.age} years`}
       </td>
       <td>{item.gender}</td>
+      <td>{item.moods != undefined  && item.moods.length > 0 && (
+        item.moods[item.moods.length-1].moodValue === 1 ? <IconMoodCry/> :
+        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodSad/> :
+        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodConfuzed/> :
+        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodEmpty/> :
+        item.moods[item.moods.length-1].moodValue === 5 ? <IconMoodSmileBeam/> :
+        <IconMoodHappy/> 
+      )}
+      </td>
       <td>
-        <Link href={{ pathname: '/patient-profile/', query: { patientId: `${item.userId}`, doctor_id: doctor_id }}}>View Details</Link>
+        <Link legacyBehavior href={{ pathname: '/patient-profile/', query: { patientId: `${item.userId}`, doctor_id: doctor_id }}}>
+          <a className='link'>View Details</a>
+        </Link>
       </td>
     </tr>
   ))
@@ -48,6 +65,7 @@ export function PatientsTable({ data, userId}) {
             <th>Patient Name</th>
             <th>Age</th>
             <th>Gender</th>
+            <th>Mood</th>
             <th>Options</th>
           </tr>
         </thead>

@@ -13,7 +13,6 @@ import {
  
 export function AssignmentsTable({ data }) {
 
-
   const rows = data.map(item => (
     <tr key={item.assignmentId}>
       <td>

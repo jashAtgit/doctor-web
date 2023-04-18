@@ -1,0 +1,18 @@
+.link {
+    text-decoration: none;
+    background-color: #7191F7;
+    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-size: calc(100% + 20px) calc(100% + 20px);
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 6px 20px;
+    line-height: 1.5;
+    transition: background-color .2s,background-position .2s;
+    border-radius: 100px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+  }
+  .link:hover {
+    background-position: -20px -20px;
+  }

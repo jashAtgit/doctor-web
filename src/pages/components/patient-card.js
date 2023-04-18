@@ -8,6 +8,7 @@ import { getDemographics } from '../services/user';
 import { ActivitySelectionTable } from './activities-table';
 import Chat from './Chat';
 import { AssignmentsTable } from './AssignmentsTable';
+import { MoodChart } from './MoodChart';
 
 export function PatientCard({patientData}) {
 
@@ -168,7 +169,21 @@ export function PatientCard({patientData}) {
           </>
           : null}
           
-        
+          <Space h="xl"/>
+      <Paper      
+        radius={0}
+        withBorder
+        p="lg"
+        shadow="xl"
+        sx={(theme) => ({
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+        })}
+      
+        >
+          <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Mood Tracker</Title>  
+          <Divider my="sm" />
+          <MoodChart patientId={medData.id}/>
+        </Paper>
         
     </Paper>
 

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export async function getPatientMood(patient_id) {
+export async function getPatientMoods(patient_id) {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     //get patient's mood on current date(or latest)
@@ -10,7 +10,7 @@ export async function getPatientMood(patient_id) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     },
-    }).then(response => response.data.response)
+    }).then(response => response.data)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";
