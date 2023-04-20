@@ -16,3 +16,41 @@
   .link:hover {
     background-position: -20px -20px;
   }
+
+  .button-eval {
+    text-decoration: none;
+    background-color: #7191F7;
+    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-size: calc(100% + 20px) calc(100% + 20px);
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 2px 20px;
+    line-height: 1;
+    transition: background-color .2s,background-position .2s;
+    border-radius: 100px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+  }
+  .button-eval:hover {
+    background-position: -20px -20px;
+  }
+
+  .button-assign {
+    text-decoration: none;
+    background-color: #7191F7;
+    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-size: calc(100% + 20px) calc(100% + 20px);
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 2px 20px;
+    line-height: 1;
+    transition: background-color .2s,background-position .2s;
+    border-radius: 100px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+  }
+  .button-assign:hover {
+    background-position: -20px -20px;
+  }

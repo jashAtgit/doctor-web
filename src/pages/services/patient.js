@@ -62,3 +62,25 @@ export async function getPatientActivities(patientId) {
 }
 
 
+// /patients/{patientId}/answers/{questionId}
+export async function getAnswerByQuestionId(patientId, questionId) {
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    //get all available activities
+    const response = axios.get(`/patients/${patientId}/answers/${questionId}`,
+    {
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    },
+    }).then(response => response.data)
+    .catch(err => {
+        console.log("error code : " + err.response.status);
+        return "error";
+
+    });
+    return response
+}
+
+
+

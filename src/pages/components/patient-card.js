@@ -17,7 +17,7 @@ export function PatientCard({patientData}) {
   const [activities, setActivities] = useState();
   const [docName, setDocName] = useState();
 
-  const [opened, { open, close }] = useDisclosure(false);
+  const [chatOpened, chatModal] = useDisclosure(false);
 
   const [assginedActivies, setAssignedActivities] = useState([]);
 
@@ -81,7 +81,7 @@ export function PatientCard({patientData}) {
         {`User-Id : ${medData.id}`}
       </Text>
       
-      <Modal opened={opened} onClose={close} title="Have a Chat..." centered
+      <Modal opened={chatOpened} onClose={chatModal.close} title="Have a Chat..." centered
       overlayProps={{
         blur: 3,
       }}
@@ -89,7 +89,7 @@ export function PatientCard({patientData}) {
         <Chat patientId={medData.id} doctorId={doctor_id} patientName={`${demographicsData.firstName} ${demographicsData.lastName}`} docName={docName}/>
       </Modal>
 
-      <Button onClick={open} variant="default" fullWidth mt="md" radius="xl" shadow="sm">
+      <Button onClick={chatModal.open} variant="default" fullWidth mt="md" radius="xl" shadow="sm">
         Send message
       </Button>
 
@@ -164,7 +164,7 @@ export function PatientCard({patientData}) {
           >
             <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Assigned Activities</Title>  
             <Divider my="sm" />
-            <AssignmentsTable data={assginedActivies} />
+            <AssignmentsTable data={assginedActivies} patientId={medData.id} />
           </Paper> 
           </>
           : null}

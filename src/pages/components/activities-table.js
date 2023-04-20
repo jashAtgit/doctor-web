@@ -136,7 +136,7 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
       <Divider my="sm" />
       <Space h='sm' variant='dotted'/>
       <div style={{ textAlign: 'center' }}>
-        <Button uppercase onClick={(event) => {event.preventDefault();
+        <Button className="button-assign" uppercase onClick={(event) => {event.preventDefault();
           handleAssign(doctor_id, patient_id, selection, selectedValues)}}>
               Assign
         </Button>
