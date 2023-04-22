@@ -33,12 +33,12 @@ export function PatientsTable({ data, userId}) {
             item.moods[item.moods.length-1].moodValue === 5 ? 'avatar-5.png' :
             'avatar-6.png'
           }
-           size={65} radius="lg"/>
+           size={80} radius="lg"/>
           <div>
-            <Text fz="sm" fw={500}>
+            <Text fz="xl" fw={500}>
               {`${item.firstName} ${item.lastName}`}
             </Text>
-            <Text fz="xs" c="dimmed">
+            <Text fz="sm" c="dimmed">
               ID: {item.userId}
             </Text>
           </div>
@@ -46,17 +46,17 @@ export function PatientsTable({ data, userId}) {
       </td>
 
       <td>
-        {`${item.age} years`}
+        <Text size="xl">{`${item.age} years`}</Text>
       </td>
-      <td>{item.gender}</td>
-      <td>{item.moods != undefined  && item.moods.length > 0 && (
-        item.moods[item.moods.length-1].moodValue === 1 ? <IconMoodCry size={30}/> :
-        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodNervous size={30}/>:
-        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodSad size={30}/> :
-        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodConfuzed size={30}/>  :
-        item.moods[item.moods.length-1].moodValue === 5 ? <IconMoodSmileBeam size={30}/> :
-        <IconMoodHappy size={30}/>
-      )}
+      <td><Text size="xl">{item.gender}</Text></td>
+      <td><Text size="xl">{item.moods != undefined  && item.moods.length > 0 && (
+        item.moods[item.moods.length-1].moodValue === 1 ? <IconMoodCry size={40}/> :
+        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodNervous size={40}/>:
+        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodSad size={40}/> :
+        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodConfuzed size={40}/>  :
+        item.moods[item.moods.length-1].moodValue === 5 ? <IconMoodSmileBeam size={40}/> :
+        <IconMoodHappy size={40}/>
+      )}</Text>
       </td>
       <td>
         <Link legacyBehavior href={{ pathname: '/patient-profile/', query: { patientId: `${item.userId}`, doctor_id: doctor_id }}}>
@@ -71,11 +71,11 @@ export function PatientsTable({ data, userId}) {
       <Table miw={800} verticalSpacing="md">
         <thead>
           <tr>
-            <th>Patient Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Mood</th>
-            <th>Options</th>
+            <th><Text size="xl">Patient Name</Text></th>
+            <th><Text size="xl">Age</Text></th>
+            <th><Text size="xl">Gender</Text></th>
+            <th><Text size="xl">Mood</Text></th>
+            <th><Text size="xl">Options</Text></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

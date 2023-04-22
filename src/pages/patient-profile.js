@@ -81,7 +81,7 @@ function PatientProfile(){
             </Head>
             <AppShell
                 padding="md"
-                navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBar2/>}</Navbar>}
+                navbar={<Navbar width={{ base: 350 }} height={700} p="xs">{ <NavBar2/>}</Navbar>}
                 
                 // styles={(theme) => ({
                 //     main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },

@@ -71,7 +71,7 @@ import { Title } from "chart.js"
             <Card.Section sx={{ background: `url(doctor-profile-background.jpg)`, height: 150 }} />
             <Avatar
               src='doctor-avatar.jpg'
-              size={120}
+              size={150}
               radius={80}
               mx="auto"
               mt={-30}
@@ -79,17 +79,17 @@ import { Title } from "chart.js"
             />
             <Group position="center">
               <Stack spacing="1px">
-                <Text ta="center" fz="lg" fw={500} mt="sm">
+                <Text ta="center" fz="xl" fw={500} mt="sm">
                   {demographics.firstName + " " + demographics.lastName}
                 </Text>
-                <Text ta="center" fz="sm" c="dimmed">
+                <Text ta="center" fz="lg" c="dimmed">
                   {`${email} • ${demographics.age} years`}
                 </Text>
               </Stack>
             </Group>
 
             <div align="center">
-              <Badge color="green" variant="light">
+              <Badge color="green" variant="light" size="lg">
                 Online
               </Badge>
             </div>
@@ -98,27 +98,27 @@ import { Title } from "chart.js"
             <Group mt="md" position="center" spacing={30}>
               <div>
 
-                <Text ta="center" fz="lg" fw={500}>
+                <Text ta="center" fz="xl" fw={500}>
                   Qualification
                 </Text>
-                <Text ta="center" fz="sm" c="dimmed">
+                <Text ta="center" fz="lg" c="dimmed">
                   {doctorDetails.qualification}
                 </Text>
               </div>
               <div>
-                <Text ta="center" fz="lg" fw={500}>
+                <Text ta="center" fz="xl" fw={500}>
                   Specialization
                 </Text>
-                <Text ta="center" fz="sm" c="dimmed">
+                <Text ta="center" fz="lg" c="dimmed">
                   {doctorDetails.specialization}
                 </Text>
               </div>
 
               <div>
-                <Text ta="center" fz="lg" fw={500}>
+                <Text ta="center" fz="xl" fw={500}>
                   Experience
                 </Text>
-                <Text ta="center" fz="sm" c="dimmed">
+                <Text ta="center" fz="lg" c="dimmed">
                   {`${doctorDetails.experienceInYears} years`}
                 </Text>
               </div>
@@ -126,12 +126,12 @@ import { Title } from "chart.js"
 
           </Card>
           <Grid justify="center">
-            <Grid.Col span={4}>
+            <Grid.Col span={3}>
               <Card withBorder padding="xl" radius="md" className={classes.card}>
                 <Flex gap={80}>
                 <div>
-                <Text ta="left" weight={700}>Number of Patients</Text>
-                <Text ta="left" fz="sm" c="dimmed">
+                <Text ta="left" size="xl" weight={700}>Number of Patients</Text>
+                <Text ta="left" fz="lg" c="dimmed">
                   Today
                 </Text>
                 </div>
@@ -140,12 +140,12 @@ import { Title } from "chart.js"
               </Card>
             </Grid.Col>
 
-            <Grid.Col span={4}>
+            <Grid.Col span={3}>
               <Card withBorder padding="xl" radius="md" className={classes.card}>
               <Flex gap={80}>
                 <div>
-                <Text ta="left" weight={700}>Happy Patients</Text>
-                <Text ta="left" fz="sm" c="dimmed">
+                <Text ta="left" size="xl" weight={700}>Happy Patients</Text>
+                <Text ta="left" fz="lg" c="dimmed">
                   Today
                 </Text>
                 </div>

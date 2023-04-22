@@ -1,6 +1,6 @@
-import Login from './components/Login';
 import Dashboard from './components/dashboard';
 import { useEffect, useState } from 'react';
+import { Login } from './components/Login';
 
 
 function App(){

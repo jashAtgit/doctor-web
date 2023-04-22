@@ -74,10 +74,7 @@ function Dashboard({props}) {
     <div className={cx(classes.pageBackground)}>
     <AppShell
       padding="md"
-      navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken} active={active} setActive={setActive}  />}</Navbar>}
-      // styles={(theme) => ({
-      //   main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
-      // })}
+      navbar={<Navbar width={{ base: 350 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken} active={active} setActive={setActive}  />}</Navbar>}
     >
       {<>
        {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> :

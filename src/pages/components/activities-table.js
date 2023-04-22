@@ -87,12 +87,12 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
         </td>
         <td>
           <Group spacing="sm">
-            <Text size="sm" weight={500}>
+            <Text size="lg" weight={500}>
               {item.name}
             </Text>
           </Group>
         </td>
-        <td>{item.description}</td>
+        <td><Text size="lg">{item.description}</Text></td>
         <td>
             <Select
           data={options}
@@ -104,6 +104,7 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
             }));
           }}
           withinPortal={true}
+          size="md"
            />
         </td>
       </tr>
@@ -123,9 +124,9 @@ export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
                 transitionDuration={0}
               />
             </th>
-            <th>Activity Name</th>
-            <th>Description</th>
-            <th>Level</th>
+            <th><Text size="lg">Activity Name</Text></th>
+            <th><Text size="lg">Description</Text></th>
+            <th><Text size="lg">Level</Text></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

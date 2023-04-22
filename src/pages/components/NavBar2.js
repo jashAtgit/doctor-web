@@ -17,18 +17,9 @@ import { useRouter } from 'next/router';
 
 
 const useStyles = createStyles(theme => ({
-  // navbar: {
-  //   background: `${theme.fn.variant({
-  //     variant: "filled",
-  //     color: theme.primaryColor,
-  //   }).background}`,
-  //   backgroundImage: `url("wavy-background.png"), linear-gradient(180deg, rgba(159,185,249,1) 0%, rgba(252,253,255,1) 100%)`,
-  //   backgroundRepeat: "no-repeat",
-  // },
 
   navbar: {
     background: `#6972FF`,
-    // backgroundImage: `url("wavy-background.png")`,
     backgroundRepeat: "no-repeat",
     },
 
@@ -69,7 +60,7 @@ const useStyles = createStyles(theme => ({
     alignItems: "center",
     textDecoration: "none",
     paddingBottom: theme.spacing.md,
-    fontSize: theme.fontSizes.sm,
+    fontSize: theme.fontSizes.lg,
     color: theme.white,
     padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
     borderRadius: 100,
@@ -108,7 +99,6 @@ const useStyles = createStyles(theme => ({
 
 const data = [
   { link: "", label: "Home", icon: IconArrowLeft},
-  // { link: "", label: "My Profile", icon: IconSettings }
 ]
 
 function NavBar2() {
@@ -138,7 +128,7 @@ function NavBar2() {
 
   return (
     
-    <Navbar  width={{sm:250}} p="md" className={classes.navbar}>
+    <Navbar  width={{sm:350}} p="md" className={classes.navbar}>
       <Navbar.Section grow>
       <Group className={classes.header} position="apart">
           <div align='left'>
@@ -168,6 +158,5 @@ function NavBar2() {
    
   )
 }
-
 
 export default NavBar2;

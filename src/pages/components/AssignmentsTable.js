@@ -61,13 +61,13 @@ export function AssignmentsTable({ data, patientId }) {
       <td>
         <Group>
             <IconClipboardList/>
-            <Text>{item.assignmentId}</Text>
+            <Text size="lg">{item.assignmentId}</Text>
         </Group>
       </td>
       <td>
-        {item.item.activity.name}
+      <Text size="lg">{item.item.activity.name}</Text>
       </td>
-      <td>{item.itemLevel}</td>
+      <td><Text size="lg">{item.itemLevel}</Text></td>
       <td>
         {item.completed ? <IconSquareCheck/> : <IconSquare/> }
       </td>
@@ -119,11 +119,11 @@ export function AssignmentsTable({ data, patientId }) {
       <Table miw={800} verticalSpacing="sm">
         <thead>
           <tr>
-            <th>Assignment ID</th>
-            <th>Activity Name</th>
-            <th>Level</th>
-            <th>Status</th>
-            <th>Evaluate Responses</th>
+            <th><Text size="lg">Assignment ID</Text></th>
+            <th><Text size="lg">Activity Name</Text></th>
+            <th><Text size="lg">Level</Text></th>
+            <th><Text size="lg">Status</Text></th>
+            <th><Text size="lg">Evaluate Responses</Text></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

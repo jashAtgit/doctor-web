@@ -1,22 +1,50 @@
-import { useState } from 'react'
+import {
+    Paper,
+    createStyles,
+    TextInput,
+    PasswordInput,
+    Checkbox,
+    Button,
+    Title,
+    Text,
+    Anchor,
+    rem,
+    Image,
+    Flex,
+    Container,
+
+} from "@mantine/core"
 import Link from 'next/link'
 import { loginDoctor } from '../services/doctor';
-import {
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Anchor,
-  Paper,
-  Title,
-  Text,
-  Container,
-  Group,
-  Button,
-} from '@mantine/core';
-import { notifications } from '@mantine/notifications';
+import { useEffect, useState } from "react";
 
-function Login({props})  {
-    
+
+
+
+export function Login({ props }) {
+
+    const [bgNo, setBgNo] = useState(2);
+
+    const useStyles = createStyles(theme => ({
+        wrapper: {
+            minWidth: rem(1900),
+            minHeight: rem(1080),
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(bg-${bgNo}.svg)`
+        },
+
+        form: {
+            minHeight: rem(700),
+            maxWidth: 600,
+            paddingTop: rem(200),
+
+            background: 'transparent',
+        },
+
+    }))
+
+
     const setToken = props.setToken;
     const email = props.email;
     const setEmail = props.setEmail;
@@ -26,84 +54,99 @@ function Login({props})  {
 
     const role = 'doctor';
 
-    
-    function valid(email){
-      return /\S+@\S+\.\S+/.test(email);
+    function getRandomInt() {
+        let n = Math.floor(Math.random() * 3) + 1;
+        return n;
+    }
+
+    useEffect(()=>{
+        setBgNo(getRandomInt());
+    },[])
+
+
+    function valid(email) {
+        return /\S+@\S+\.\S+/.test(email);
     }
 
     const handleLogin = async e => {
 
         e.preventDefault();
 
-        if(!valid(email) || !password){
-          console.log("inside validation");
-          notifications.show({
-            title: "Login failed",
-            message: "Please enter valid credentials",
-            color: 'red',
-          });
-          
-          return;
+        if (!valid(email) || !password) {
+            console.log("inside validation");
+            notifications.show({
+                title: "Login failed",
+                message: "Please enter valid credentials",
+                color: 'red',
+            });
+
+            return;
         }
 
         const token = await loginDoctor({
-          email,
-          password,
-          role,
+            email,
+            password,
+            role,
         });
-        if(token == 'error'){
-          console.log("inside error");
-          notifications.show({
-            title: "Login failed",
-            message: "Please enter valid credentials",
-            color: 'red',
-          });
-          
-          return <Login setToken={setToken}/>
+        if (token == 'error') {
+            console.log("inside error");
+            notifications.show({
+                title: "Login failed",
+                message: "Please enter valid credentials",
+                color: 'red',
+            });
+
+            return <Login setToken={setToken} />
         }
         setToken(token['token']);
         localStorage.setItem('email', email)
-      }
+    }
 
-      return (
-        <Container size={420} my={40}>
-          <Title
-            align="center"
-            sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
-          >
-            Welcome Doctor!
-          </Title>
-          <Text color="dimmed" size="sm" align="center" mt={5}>
-            Do not have an account yet?{' '}
-            
-            <Link href={"register"}>
-            <Anchor size="sm" component="button">
-            Create account
-            </Anchor>
-            </Link>
-          </Text>
-    
-          <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-            <TextInput value={email || ''}
-            onChange={(event) => setEmail(event.currentTarget.value)}
-            withAsterisk
-            error={!valid(email)}
-            placeholder="email@example.com"
-            label="Your email"/>
-            <PasswordInput label="Password" placeholder="Your password" required mt="md" onChange={e => setPassword(e.target.value)}/>
-            <Group position="apart" mt="lg">
-              <Checkbox label="Remember me" />
-              <Anchor component="button" size="sm">
-                Forgot password?
-              </Anchor>
-            </Group>
-            <Button fullWidth mt="xl" onClick={handleLogin}>
-              Sign in
-            </Button>
-          </Paper>
-        </Container>
-      );
+    const { classes } = useStyles()
+    return (
+        <div className={classes.wrapper}>
+            <Paper className={classes.form} radius={0} p={30} style={{ marginLeft: 40 }}>
+                <Image maw={250} mx="auto" src="logo-welcome.svg" alt="logo" style={{ marginTop: 25 }} />
+
+                <TextInput
+                    placeholder="doctor@gmail.com"
+                    size="lg"
+                    radius="lg"
+                    withAsterisk
+                    style={{ marginTop: 60 }}
+                    value={email || ''}
+                    onChange={(event) => setEmail(event.currentTarget.value)}
+                    error={!valid(email)}
+                    label="Your email"
+                />
+                <PasswordInput
+                    label="Password"
+                    placeholder="Your password"
+                    mt="md"
+                    size="lg"
+                    radius="lg"
+                    withAsterisk
+                    required
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <div align="center">
+                    <Button className="button-login" mt="xl" size="lg" onClick={handleLogin} style={{ width: '200px' }}>
+                        Login
+                    </Button>
+                </div>
+
+                <Text ta="center" mt="md">
+                    Don&apos;t have an account?{" "}
+                    <Anchor
+                        href="#"
+                        weight={700}
+                        onClick={event => event.preventDefault()}
+                    >
+                        Contact admin
+                    </Anchor>
+                </Text>
+            </Paper>
+        </div>
+
+    )
 }
-
-export default Login;
-
