@@ -47,14 +47,11 @@ export function AssignmentsTable({ data, patientId }) {
           }
           actId_to_QA[id] = questionSet;
         }
-        console.log(actId_to_QA);
         setIsLoading(false);
         setQA(actId_to_QA);
 
       }
-
       fetchData();
-      
   }, [])
 
  
@@ -97,7 +94,6 @@ export function AssignmentsTable({ data, patientId }) {
     transitionProps={{ transition: 'rotate-left' }}
     centered size="lg"
     title="  "
-    overlayOpacity={0.1}
     scrollAreaComponent={ScrollArea.Autosize}
     overlayProps={{
       style: { backdropFilter: 'blur(4px)' },

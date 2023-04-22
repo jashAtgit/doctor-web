@@ -17,6 +17,7 @@ function Dashboard({props}) {
   const [userId, setUserId] = useState();
   const [patient_list, setPatientList] = useState([]);
   const [active, setActive] = useState("Patients")
+  const [happyCount, setHappyCount] = useState(0);
 
 
   function clearToken(){
@@ -33,14 +34,19 @@ function Dashboard({props}) {
       const patient_ids = await getPatientIdsByDocId(data.userId);
 
       let demographicsData = [];
+      let count = 0;
       for (const patientId of patient_ids) {
         const patientDemographics = await getDemographics(patientId);
         const moods = await getPatientMoods(patientId);
+        if(moods.length > 0 && moods[moods.length-1].moodValue >= 5){
+          count += 1;
+        }
         if(moods != 'error')
           patientDemographics['moods'] = moods;
         demographicsData.push(patientDemographics);
       }
       setPatientList(demographicsData);
+      setHappyCount(count);
     }
     fetchData();
   }, []);
@@ -74,7 +80,8 @@ function Dashboard({props}) {
       // })}
     >
       {<>
-       {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> : <DoctorProfile userId={userId} email={email}/> }
+       {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> :
+        <DoctorProfile userId={userId} email={email} patientCount={patient_list.length} happyCount={happyCount}/> }
        </>}
     </AppShell>
     </div>

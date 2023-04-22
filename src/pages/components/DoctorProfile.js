@@ -6,10 +6,17 @@ import {
     Group,
     rem,
     LoadingOverlay,
+    Container,
+    SimpleGrid,
+    Badge,
+    Flex,
+    Stack,
+    Grid,
   } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { getDemographics } from "../services/user"
 import { getDoctorDetails } from "../services/doctor"
+import { Title } from "chart.js"
   
   const useStyles = createStyles(theme => ({
     card: {
@@ -24,12 +31,12 @@ import { getDoctorDetails } from "../services/doctor"
     }
   }))
   
-  export function DoctorProfile({userId, email}) {
+  export function DoctorProfile({userId, email, patientCount, happyCount}) {
     const { classes, theme } = useStyles()
     const [demographics, setDemographics] = useState();
     const [doctorDetails, setDoctorDetails] = useState();
 
-  
+    
     
 
     useEffect(() => {
@@ -53,52 +60,103 @@ import { getDoctorDetails } from "../services/doctor"
       }
   
     return (
-      <Card withBorder padding="xl" radius="md" className={classes.card}>
-        <Card.Section sx={{ backgroundImage: `url(doctor-profile-background.jpg)`, height: 250 }} />
-        <Avatar
-          src='doctor.png'
-          size={120}
-          radius={80}
-          mx="auto"
-          mt={-30}
-          className={classes.avatar}
-        />
-        <Text ta="center" fz="lg" fw={500} mt="sm">
-          {demographics.firstName + " " + demographics.lastName}
-        </Text>
-        <Text ta="center" fz="sm" c="dimmed">
-          {`${email} • ${demographics.age} years`} 
-        </Text>
-        <Group mt="md" position="center" spacing={30}>
-            <div>
-            
-            <Text ta="center" fz="lg" fw={500}>
-            Qualification
-            </Text>
-            <Text ta="center" fz="sm" c="dimmed">
-            {doctorDetails.qualification}
-            </Text>
-            </div>
-            <div>
-            <Text ta="center" fz="lg" fw={500}>
-            Specialization
-            </Text>
-            <Text ta="center" fz="sm" c="dimmed">
-            {doctorDetails.specialization}
-            </Text>
+
+      <Container size="auto">
+        <SimpleGrid
+          cols={1}
+          spacing="md"
+          breakpoints={[{ maxWidth: "sm", cols: 1 }]}
+        >
+          <Card withBorder padding="xl" radius="md" className={classes.card}>
+            <Card.Section sx={{ background: `url(doctor-profile-background.jpg)`, height: 150 }} />
+            <Avatar
+              src='doctor-avatar.jpg'
+              size={120}
+              radius={80}
+              mx="auto"
+              mt={-30}
+              className={classes.avatar}
+            />
+            <Group position="center">
+              <Stack spacing="1px">
+                <Text ta="center" fz="lg" fw={500} mt="sm">
+                  {demographics.firstName + " " + demographics.lastName}
+                </Text>
+                <Text ta="center" fz="sm" c="dimmed">
+                  {`${email} • ${demographics.age} years`}
+                </Text>
+              </Stack>
+            </Group>
+
+            <div align="center">
+              <Badge color="green" variant="light">
+                Online
+              </Badge>
             </div>
 
-            <div>
-            <Text ta="center" fz="lg" fw={500}>
-            Experience
-            </Text>
-            <Text ta="center" fz="sm" c="dimmed">
-            {`${doctorDetails.experienceInYears} years`}
-            </Text>
-            </div>
-        </Group>
-        
-      </Card>
+
+            <Group mt="md" position="center" spacing={30}>
+              <div>
+
+                <Text ta="center" fz="lg" fw={500}>
+                  Qualification
+                </Text>
+                <Text ta="center" fz="sm" c="dimmed">
+                  {doctorDetails.qualification}
+                </Text>
+              </div>
+              <div>
+                <Text ta="center" fz="lg" fw={500}>
+                  Specialization
+                </Text>
+                <Text ta="center" fz="sm" c="dimmed">
+                  {doctorDetails.specialization}
+                </Text>
+              </div>
+
+              <div>
+                <Text ta="center" fz="lg" fw={500}>
+                  Experience
+                </Text>
+                <Text ta="center" fz="sm" c="dimmed">
+                  {`${doctorDetails.experienceInYears} years`}
+                </Text>
+              </div>
+            </Group>
+
+          </Card>
+          <Grid justify="center">
+            <Grid.Col span={4}>
+              <Card withBorder padding="xl" radius="md" className={classes.card}>
+                <Flex gap={80}>
+                <div>
+                <Text ta="left" weight={700}>Number of Patients</Text>
+                <Text ta="left" fz="sm" c="dimmed">
+                  Today
+                </Text>
+                </div>
+                <Text ta="right" fz={50}>{patientCount}</Text>
+                </Flex>
+              </Card>
+            </Grid.Col>
+
+            <Grid.Col span={4}>
+              <Card withBorder padding="xl" radius="md" className={classes.card}>
+              <Flex gap={80}>
+                <div>
+                <Text ta="left" weight={700}>Happy Patients</Text>
+                <Text ta="left" fz="sm" c="dimmed">
+                  Today
+                </Text>
+                </div>
+                <Text ta="right" fz={50}>{happyCount}</Text>
+                </Flex>
+              </Card>
+            </Grid.Col>
+          </Grid>
+        </SimpleGrid>
+
+      </Container>
     )
   }
   
