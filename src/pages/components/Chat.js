@@ -40,15 +40,15 @@ export default function Chat({patientId, doctorId, patientName, docName}) {
             conversation.setParticipant(currentUser);
             conversation.setParticipant(otherUser);
 
-            const chatbox = session.createChatbox();
-            chatbox.select(conversation);
-            chatbox.mount(chatboxEl.current);
+            const inbox = session.createInbox();
+            inbox.select(conversation);
+            inbox.mount(chatboxEl.current);
         }
       });
     }, [talkLoaded]);
 
     return (
-          <div style={{height: '500px'}}  ref={chatboxEl} />
+          <div style={{width: '800px', height: '500px'}}  ref={chatboxEl} />
       )
 
   }

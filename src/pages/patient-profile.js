@@ -1,11 +1,21 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Container, Space , LoadingOverlay, BackgroundImage} from "@mantine/core";
+import {
+    Container,
+    Space,
+    LoadingOverlay,
+    BackgroundImage,
+    AppShell,
+    Navbar, Header,
+    createStyles,
+
+} from "@mantine/core";
 import { PatientCard } from "./components/patient-card";
 import { useEffect, useState } from "react";
-import { getPatientMedHist} from "./services/patient";
+import { getPatientMedHist } from "./services/patient";
 import { Notifications } from '@mantine/notifications';
 import Axios from "axios";
+import NavBar2 from "./components/NavBar2";
 "use strict";
 
 
@@ -45,6 +55,17 @@ function PatientProfile(){
         ...medData,
     };
     
+    const useStyles = createStyles(theme => ({
+
+    pageBackground:{
+        
+        background: ` url("wavy-background.png"), linear-gradient(180deg, #C2D3FC 0%, #FBFDFF 100%)`,
+        backgroundPosition: "top",
+        backgroundRepeat: "no-repeat",
+      },
+    }))
+    const { classes, cx } = useStyles();
+    
 
     if(!medData || medData == 'undefined'){
         return (
@@ -53,16 +74,21 @@ function PatientProfile(){
     }
     
     return (
-        <div style={{backgroundColor: '#edede9'}}>  
+        <div className={cx(classes.pageBackground)}>
             <Notifications />
-                <Space h="lg" />
-                <Head>
-                    <title>Patient Profile</title>
-                </Head>
+            <Head>
+                <title>Patient Profile</title>
+            </Head>
+            <AppShell
+                padding="md"
+                navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBar2/>}</Navbar>}
                 
-                <Container>
-                    <PatientCard patientData={patientData}/>
-                </Container>
+                // styles={(theme) => ({
+                //     main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+                // })}
+            >
+                <PatientCard patientData={patientData} />
+            </AppShell>
         </div>
                 
     );

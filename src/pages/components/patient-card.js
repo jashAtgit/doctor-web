@@ -1,9 +1,18 @@
 import { useDisclosure } from '@mantine/hooks';
-import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay, Modal} from '@mantine/core';
-import { IconUser, IconSmoking, IconSmokingNo, IconBeer, IconBeerOff,  IconRulerMeasure, IconWeight } from '@tabler/icons-react';
+import { Text, Button, Paper, Space, Title, Flex, Divider, LoadingOverlay, Modal,
+  Container,
+  Grid,
+  SimpleGrid,
+  useMantineTheme,
+  rem,
+  Avatar,
+  Stack,
+  Group,
+  
+} from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { getAllActivities } from '../services/item';
-import {getPatientActivities } from '../services/patient';
+import {getPatientActivities, getPatientMoods } from '../services/patient';
 import { getDemographics } from '../services/user';
 import { ActivitySelectionTable } from './activities-table';
 import Chat from './Chat';
@@ -11,17 +20,19 @@ import { AssignmentsTable } from './AssignmentsTable';
 import { MoodChart } from './MoodChart';
 
 export function PatientCard({patientData}) {
+  const PRIMARY_COL_HEIGHT = rem(300)
+  const theme = useMantineTheme()
+  const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`
 
   const {doctor_id, ...medData} = patientData;
   const [demographicsData, setDemographicData] = useState();
   const [activities, setActivities] = useState();
   const [docName, setDocName] = useState();
+  const [moodValue, setMoodVal] = useState();
 
   const [chatOpened, chatModal] = useDisclosure(false);
 
   const [assginedActivies, setAssignedActivities] = useState([]);
-
-
 
   useEffect(() => {
     async function fetchData(patient_id, doctorId){
@@ -33,6 +44,9 @@ export function PatientCard({patientData}) {
 
       const docDemographics = await getDemographics(doctorId);
       setDocName(docDemographics.firstName + " " + docDemographics.lastName);
+
+      const moods = await getPatientMoods(patient_id);
+      setMoodVal(moods[moods.length-1].moodValue);
 
       
       
@@ -58,104 +72,172 @@ export function PatientCard({patientData}) {
 
 
   return (
-    <Paper
-      radius={0}
-      shadow="xl"
-      withBorder
-      p="xl"
-      sx={(theme) => ({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-      })}
-    >   
-        <div style={{ textAlign: 'center' }}>
-            <IconUser size={50} radius={10} />
-        </div>
-      
-      <Text ta="center" fz="lg" weight={500} mt="md">
-        {`${demographicsData.firstName} ${demographicsData.lastName}`}
-      </Text>
-      <Text ta="center" c="dimmed" fz="sm">
-        {`${demographicsData.age} years • ${demographicsData.gender}`}
-      </Text>
-      <Text ta="center" c="dimmed" fz="sm">
-        {`User-Id : ${medData.id}`}
-      </Text>
-      
-      <Modal opened={chatOpened} onClose={chatModal.close} title="Have a Chat..." centered
-      overlayProps={{
-        blur: 3,
-      }}
-      >
-        <Chat patientId={medData.id} doctorId={doctor_id} patientName={`${demographicsData.firstName} ${demographicsData.lastName}`} docName={docName}/>
-      </Modal>
-
-      <Button onClick={chatModal.open} variant="default" fullWidth mt="md" radius="xl" shadow="sm">
-        Send message
-      </Button>
-
-      <Space h="xl" />
-      <Paper
-      radius={0}
-      shadow="sm"
-      withBorder
-      p="lg"
-      sx={(theme) => ({
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-      })}
-      
-      >   
-        <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Health Details</Title>
-        <Divider my="sm" />
-            <Flex  gap="xl"
-              justify="center"
-              align="center"
-              direction="row"
-              wrap="nowrap"
-              mih={100}
-              
-              >
-              <div style={{display: "flex", justifyContent: "center"}}>
-              <Text fz="md"> {<IconRulerMeasure/>}</Text>
-              {medData.height} Cms 
-              </div>
-              <div style={{display: "flex", justifyContent: "center"}}>
-              <Text fz="md"> {<IconWeight/>}</Text>
-              {medData.weight} Kg
-              </div>
-              <Text fz="md"> {medData.smoker ? <IconSmoking/> : <IconSmokingNo/>}</Text>
-              <Text fz="md"> {medData.drinksAlcohol ? <IconBeer/> : <IconBeerOff/>} </Text>
-              
-              
-            </Flex>
-            <div style={{display: "flex", justifyContent: "center"}}>
-              <Text fz="md" fw={700} >Disease History:</Text> <Space w="md"/><Text fz="md"> {medData.diseases}</Text>
-              </div>
-            <Space h="sm"/>
-      </Paper>
-
-    <Space h="xl"/>
-      <Paper      
-        radius={0}
-        withBorder
-        p="lg"
-        shadow="xl"
-        sx={(theme) => ({
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-        })}
-      
+    <>
+      <Container size="auto">
+        <SimpleGrid
+          cols={2}
+          spacing="md"
+          breakpoints={[{ maxWidth: "sm", cols: 1 }]}
         >
-          <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Push Activities</Title>  
-          <Divider my="sm" />
-          <ActivitySelectionTable data={activities} doctor_id={doctor_id} patient_id={medData.id}/>
-        </Paper>
+          <Grid>
+            <Grid.Col span={12}>
+              <Paper
+                radius={20}
+                shadow="sm"
+                withBorder
+                p="lg"
+                sx={(theme) => ({
+                  backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+                })}
+
+              >
+
+                <Flex gap="xl">
+                  <Avatar src={moodValue === 1 ? 'avatar-1.png' :
+                    moodValue === 2 ? 'avatar-2.png' :
+                      moodValue === 3 ? 'avatar-3.png' :
+                        moodValue === 4 ? 'avatar-4.png' :
+                          moodValue === 5 ? 'avatar-5.png' :
+                            'avatar-6.png'
+                  }
+                    size={100} radius="lg" />
+                  <Stack spacing="1px">
+                    <Text ta="left" fz="lg" weight={500} mt="md">
+                      {`${demographicsData.firstName} ${demographicsData.lastName}`}
+                    </Text>
+                    <Group>
+                      <Text ta="center" c="dimmed" fz="sm">
+                        {`${demographicsData.age} years • ${demographicsData.gender}`}
+                      </Text>
+                      <Text ta="center" c="dimmed" fz="sm">
+                        {`User-Id : ${medData.id}`}
+                      </Text>
+                    </Group>
+                  </Stack>
+
+                  <Button className="button-eval" onClick={chatModal.open} variant="default" ml="50px" mt="xl" radius="xl" shadow="sm">
+                    Send message
+                  </Button>
+                </Flex>
+
+
         
-        {assginedActivies.length !== 0 ? 
+              </Paper>
+            </Grid.Col>
+
+            <Grid.Col span="auto">
+              <Paper
+                radius={20}
+                shadow="sm"
+                withBorder
+                p="lg"
+                sx={(theme) => ({
+                  backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+                })}
+
+              >
+                <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Health Details</Title>
+                <Divider my="sm" />
+                <Flex gap="xl"
+                  justify="center"
+                  align="center"
+                  direction="row"
+                  wrap="nowrap"
+                  mih={100}
+
+                >
+                  <Group>
+                  <div>
+                    <Text fz="md" fw={500}> Height </Text>
+                    <Text ta="center" c="dimmed" fz="sm">
+                        {medData.height} cm
+                      </Text>
+                  </div>
+                  <Divider orientation="vertical" />
+                  <div>
+                    <Text fz="md" fw={500}> Weight </Text>
+                    <Text ta="center" c="dimmed" fz="sm">
+                        {medData.weight} kg
+                      </Text>
+                  </div>
+                  <Divider orientation="vertical" />
+                  <div >
+                    <Text fz="md" fw={500}> Smoker </Text>
+                    <Text ta="center" c="dimmed" fz="sm">
+                        {medData.smoker ? 'Yes' : 'No'}
+                      </Text>
+                  </div>
+                  <Divider orientation="vertical" />
+                  <div>
+                    <Text fz="md" fw={500}> Drinker </Text>
+                    <Text ta="center" c="dimmed" fz="sm">
+                        {medData.drinksAlcohol? "Yes" : "No"}
+                      </Text>
+                  </div>
+
+                  </Group>
+                </Flex>
+                <Group position="center">
+                <div>
+                  <Text fz="md" fw={500} >Disease History</Text> 
+                  <Text ta="center" c="dimmed" fz="sm"> {medData.diseases}</Text>
+                </div>
+                </Group>
+                <Space h="sm" />
+              </Paper>
+            </Grid.Col>
+
+          </Grid>
+
+          <Grid gutter="md" align="flex-end">
+            <Grid.Col span="auto">
+              <Paper
+                radius={20}
+                withBorder
+                p="lg"
+                shadow="xl"
+                sx={(theme) => ({
+                  backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+                })}
+
+              >
+                <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Mood Tracker</Title>
+                <Divider my="sm" />
+                <MoodChart patientId={medData.id} />
+              </Paper>
+            </Grid.Col>
+          </Grid>
+        </SimpleGrid>
+
+        <Space h="xl"/>
+        <SimpleGrid
+          cols={1}
+          spacing="md"
+          breakpoints={[{ maxWidth: "sm", cols: 1 }]}
+        >
+
+          <Paper
+            radius={20}
+            withBorder
+            p="xl"
+            shadow="xl"
+            sx={(theme) => ({
+              backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+            })}
+
+          >
+            <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Push Activities</Title>
+            <Divider my="sm" />
+            <ActivitySelectionTable data={activities} doctor_id={doctor_id} patient_id={medData.id} />
+          </Paper>
+
+          {assginedActivies.length !== 0 ? 
          <>
          <Space h="xl"/>
          <Paper      
-          radius={0}
+          radius={20}
           withBorder
-          p="lg"
+          p="xl"
           shadow="xl"
           sx={(theme) => ({
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
@@ -170,23 +252,20 @@ export function PatientCard({patientData}) {
           : null}
           
           <Space h="xl"/>
-      <Paper      
-        radius={0}
-        withBorder
-        p="lg"
-        shadow="xl"
-        sx={(theme) => ({
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-        })}
-      
-        >
-          <Title order={2} tt="uppercase" fw={700} c="dimmed" size="h4" align="center">Mood Tracker</Title>  
-          <Divider my="sm" />
-          <MoodChart patientId={medData.id}/>
-        </Paper>
-        
-    </Paper>
 
+        </SimpleGrid>
+      </Container>
+    <Space h="xl"/>
 
+      <Modal opened={chatOpened} onClose={chatModal.close} title="  " centered size="auto"
+        overlayProps={{
+          blur: 3,
+        }}
+      >
+        <Title order={3}>Inbox</Title>
+        <Space h="md" />
+        <Chat patientId={medData.id} doctorId={doctor_id} patientName={`${demographicsData.firstName} ${demographicsData.lastName}`} docName={docName} />
+      </Modal>
+    </>
   );
 }

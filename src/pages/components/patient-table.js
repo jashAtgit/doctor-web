@@ -3,6 +3,7 @@ import {
     Group,
     Text,
     ScrollArea,
+    Avatar,
   } from "@mantine/core"
 
 import {
@@ -19,18 +20,26 @@ import Link from "next/link"
 export function PatientsTable({ data, userId}) {
 
   const doctor_id = userId;
+  
 
   const rows = data.map(item => (
     <tr key={item.userId}>
       <td>
         <Group spacing="sm">
-          <IconUser size={40} />
+          <Avatar src={item.moods[item.moods.length-1].moodValue === 1 ? 'avatar-1.png' :
+            item.moods[item.moods.length-1].moodValue === 2 ? 'avatar-2.png' :
+            item.moods[item.moods.length-1].moodValue === 3 ? 'avatar-3.png' :
+            item.moods[item.moods.length-1].moodValue === 4 ? 'avatar-4.png' :
+            item.moods[item.moods.length-1].moodValue === 5 ? 'avatar-5.png' :
+            'avatar-6.png'
+          }
+           size={65} radius="lg"/>
           <div>
             <Text fz="sm" fw={500}>
               {`${item.firstName} ${item.lastName}`}
             </Text>
             <Text fz="xs" c="dimmed">
-              {item.gender}
+              ID: {item.userId}
             </Text>
           </div>
         </Group>
@@ -41,12 +50,12 @@ export function PatientsTable({ data, userId}) {
       </td>
       <td>{item.gender}</td>
       <td>{item.moods != undefined  && item.moods.length > 0 && (
-        item.moods[item.moods.length-1].moodValue === 1 ? <IconMoodCry/> :
-        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodNervous/>:
-        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodSad/> :
-        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodConfuzed/>  :
-        item.moods[item.moods.length-1].moodValue === 5 ? <IconMoodSmileBeam/> :
-        <IconMoodHappy/> 
+        item.moods[item.moods.length-1].moodValue === 1 ? <IconMoodCry size={30}/> :
+        item.moods[item.moods.length-1].moodValue === 2 ? <IconMoodNervous size={30}/>:
+        item.moods[item.moods.length-1].moodValue === 3 ? <IconMoodSad size={30}/> :
+        item.moods[item.moods.length-1].moodValue === 4 ? <IconMoodConfuzed size={30}/>  :
+        item.moods[item.moods.length-1].moodValue === 5 ? <IconMoodSmileBeam size={30}/> :
+        <IconMoodHappy size={30}/>
       )}
       </td>
       <td>
@@ -59,7 +68,7 @@ export function PatientsTable({ data, userId}) {
 
   return (
     <ScrollArea>
-      <Table miw={800} verticalSpacing="sm">
+      <Table miw={800} verticalSpacing="md">
         <thead>
           <tr>
             <th>Patient Name</th>

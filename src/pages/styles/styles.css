@@ -1,7 +1,7 @@
 .link {
     text-decoration: none;
     background-color: #7191F7;
-    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-image: linear-gradient(90deg, #7190FA -0.08%, #3540F7 100.08%);
     background-size: calc(100% + 20px) calc(100% + 20px);
     color: #FFFFFF;
     font-weight: bold;
@@ -20,7 +20,7 @@
   .button-eval {
     text-decoration: none;
     background-color: #7191F7;
-    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-image: linear-gradient(90deg, #7190FA -0.08%, #3540F7 100.08%);
     background-size: calc(100% + 20px) calc(100% + 20px);
     color: #FFFFFF;
     font-weight: bold;
@@ -39,7 +39,7 @@
   .button-assign {
     text-decoration: none;
     background-color: #7191F7;
-    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+    background-image: linear-gradient(90deg, #7190FA -0.08%, #3540F7 100.08%);
     background-size: calc(100% + 20px) calc(100% + 20px);
     color: #FFFFFF;
     font-weight: bold;

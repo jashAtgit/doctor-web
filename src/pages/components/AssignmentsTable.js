@@ -18,7 +18,6 @@ import {
   IconClipboardList,
 } from "@tabler/icons-react"
 
-import { useDisclosure } from "@mantine/hooks";
 import { useState, useEffect } from "react";
 import { getQuestionsByActId } from "../services/item";
 import { getAnswerByQuestionId } from "../services/patient";
@@ -98,10 +97,11 @@ export function AssignmentsTable({ data, patientId }) {
     transitionProps={{ transition: 'rotate-left' }}
     centered size="lg"
     title="  "
+    overlayOpacity={0.1}
     scrollAreaComponent={ScrollArea.Autosize}
     overlayProps={{
-      opacity: 0.55,
-      blur: 4,
+      style: { backdropFilter: 'blur(4px)' },
+      opacity: 0.5,
     }}
     >
         <Title order={2}>{currActivity}</Title>

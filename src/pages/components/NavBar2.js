@@ -9,12 +9,11 @@ import {
   Image,
 } from "@mantine/core"
 import {
-  IconSettings,
+  IconHome,
   IconLogout,
-  IconUsers,
-  IconActivityHeartbeat,
+  IconArrowLeft,
 } from "@tabler/icons-react"
-
+import { useRouter } from 'next/router';
 
 
 const useStyles = createStyles(theme => ({
@@ -29,7 +28,7 @@ const useStyles = createStyles(theme => ({
 
   navbar: {
     background: `#6972FF`,
-    backgroundImage: `url("wavy-background.png")`,
+    // backgroundImage: `url("wavy-background.png")`,
     backgroundRepeat: "no-repeat",
     },
 
@@ -81,7 +80,7 @@ const useStyles = createStyles(theme => ({
       backgroundColor: theme.fn.lighten(
         theme.fn.variant({ variant: "filled", color: theme.primaryColor })
           .background,
-        0.1
+        0.2
       )
     }
   },
@@ -98,7 +97,7 @@ const useStyles = createStyles(theme => ({
       backgroundColor: theme.fn.lighten(
         theme.fn.variant({ variant: "filled", color: theme.primaryColor })
           .background,
-        0.25
+        0.1
       ),
       [`& .${getStylesRef("icon")}`]: {
         opacity: 0.9
@@ -108,26 +107,28 @@ const useStyles = createStyles(theme => ({
 }))
 
 const data = [
-  { link: "", label: "Patients", icon: IconUsers },
-  { link: "", label: "My Profile", icon: IconSettings }
+  { link: "", label: "Home", icon: IconArrowLeft},
+  // { link: "", label: "My Profile", icon: IconSettings }
 ]
 
-function NavBarSimple({clearToken, setToken, active, setActive}) {
+function NavBar2() {
 
+  function clearToken(){
+    localStorage.removeItem('token');
+  }
 
+  const router = useRouter();
   const { classes, cx } = useStyles()
   
 
   const links = data.map(item => (
     <a
-      className={cx(classes.link, {
-        [classes.linkActive]: item.label === active
-      })}
+      className={cx(classes.link)}
       href={item.link}
       key={item.label}
       onClick={event => {
         event.preventDefault()
-        setActive(item.label)
+        router.back();
       }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
@@ -154,8 +155,8 @@ function NavBarSimple({clearToken, setToken, active, setActive}) {
           href="#"
           className={classes.link}
           onClick={() => {
-            setToken();
             clearToken();
+            router.back();
           }}
         >
           <IconLogout className={classes.linkIcon} stroke={1.5}/>
@@ -163,13 +164,10 @@ function NavBarSimple({clearToken, setToken, active, setActive}) {
         </a>
       </Navbar.Section>
     </Navbar>
-    
-      
-    
 
    
   )
 }
 
 
-export default NavBarSimple;
+export default NavBar2;

@@ -1,4 +1,4 @@
-import { AppShell, Navbar, LoadingOverlay } from '@mantine/core';
+import { AppShell, Navbar, LoadingOverlay, createStyles } from '@mantine/core';
 import NavBarSimple from './NavBar';
 import { PatientsTable } from './patient-table';
 
@@ -45,6 +45,17 @@ function Dashboard({props}) {
     fetchData();
   }, []);
 
+  const useStyles = createStyles(theme => ({
+
+    pageBackground:{
+        
+        background: `linear-gradient(180deg, #C2D3FC 0%, #FBFDFF 100%)`,
+        backgroundPosition: "top",
+        backgroundRepeat: "no-repeat",
+      },
+    }))
+    const { classes, cx } = useStyles();
+
 
   if(!patient_list || patient_list === 'undefined' || patient_list.length === 0){
     return (
@@ -54,17 +65,19 @@ function Dashboard({props}) {
   
   
   return (
+    <div className={cx(classes.pageBackground)}>
     <AppShell
       padding="md"
       navbar={<Navbar width={{ base: 250 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken} active={active} setActive={setActive}  />}</Navbar>}
-      styles={(theme) => ({
-        main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
-      })}
+      // styles={(theme) => ({
+      //   main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+      // })}
     >
       {<>
        {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> : <DoctorProfile userId={userId} email={email}/> }
        </>}
     </AppShell>
+    </div>
   );
   
 }
