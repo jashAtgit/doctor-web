@@ -18,3 +18,7 @@ export default function QA({qa}){
         </>
     );
 }
+
+QA.getInitialProps = async () => {
+    return {};
+  };

@@ -147,3 +147,7 @@ export default function ActivitySelectionTable({ data, doctor_id, patient_id }) 
     
   );
 }
+
+ActivitySelectionTable.getInitialProps = async () => {
+  return {};
+};

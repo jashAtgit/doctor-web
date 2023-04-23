@@ -38,3 +38,7 @@ export async function getQuestionsByActId(activityId) {
 
     return response
 }
+
+getAllActivities.getInitialProps = async () => {
+    return {};
+  };

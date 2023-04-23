@@ -149,4 +149,8 @@ export default function Login({ props }) {
     )
 }
 
+Login.getInitialProps = async () => {
+    return {};
+  };
+
 

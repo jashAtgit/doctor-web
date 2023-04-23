@@ -22,3 +22,7 @@ export default async function pushAssignments(assignment_list) {
     });
     return response
 }
+
+pushAssignments.getInitialProps = async () => {
+    return {};
+  };

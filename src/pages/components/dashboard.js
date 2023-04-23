@@ -86,4 +86,8 @@ function Dashboard({props}) {
   
 }
 
+Dashboard.getInitialProps = async () => {
+  return {};
+};
+
 export default Dashboard;

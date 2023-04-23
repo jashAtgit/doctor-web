@@ -82,5 +82,9 @@ export async function getAnswerByQuestionId(patientId, questionId) {
     return response
 }
 
+getPatientMoods.getInitialProps = async () => {
+    return {};
+  };
+
 
 

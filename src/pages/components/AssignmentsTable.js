@@ -132,3 +132,7 @@ export default function AssignmentsTable({ data, patientId }) {
     </>
   )
 }
+
+AssignmentsTable.getInitialProps = async () => {
+  return {};
+};

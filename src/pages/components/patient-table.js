@@ -83,3 +83,7 @@ export default function PatientsTable({ data, userId}) {
     </ScrollArea>
   )
 }
+
+PatientsTable.getInitialProps = async () => {
+  return {};
+};

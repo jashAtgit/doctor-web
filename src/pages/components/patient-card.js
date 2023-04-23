@@ -274,3 +274,7 @@ export default function PatientCard({ patientData }) {
     </>
   );
 }
+
+PatientCard.getInitialProps = async () => {
+  return {};
+};

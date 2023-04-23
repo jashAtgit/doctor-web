@@ -73,3 +73,7 @@ export async function getDoctorDetails(userId) {
     });
     return response
 }
+
+getDocIdByEmail.getInitialProps = async () => {
+    return {};
+  };

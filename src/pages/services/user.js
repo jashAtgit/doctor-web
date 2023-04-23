@@ -17,3 +17,7 @@ export default async function getDemographics(user_id) {
     });
     return response
 }
+
+getDemographics.getInitialProps = async () => {
+    return {};
+  };
