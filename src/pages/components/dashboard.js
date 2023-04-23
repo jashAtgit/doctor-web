@@ -1,12 +1,12 @@
 import { AppShell, Navbar, LoadingOverlay, createStyles } from '@mantine/core';
 import NavBarSimple from './NavBar';
-import { PatientsTable } from './patient-table';
+import PatientsTable from './patient-table';
 
-import { getPatientMood, getPatientMoods } from '../services/patient';
-import { getDemographics } from '../services/user';
-import { getPatientIdsByDocId, getDocIdByEmail } from '../services/doctor';
+import getPatientMoods from '../services/patient';
+import getDemographics from '../services/user';
+import getDocIdByEmail, { getPatientIdsByDocId} from '../services/doctor';
 import { useEffect, useState } from 'react';
-import { DoctorProfile } from './DoctorProfile';
+import DoctorProfile from './DoctorProfile';
 
 
 function Dashboard({props}) {

@@ -14,9 +14,8 @@ import {
     Grid,
   } from "@mantine/core"
 import { useEffect, useState } from "react"
-import { getDemographics } from "../services/user"
+import getDemographics from "../services/user"
 import { getDoctorDetails } from "../services/doctor"
-import { Title } from "chart.js"
   
   const useStyles = createStyles(theme => ({
     card: {

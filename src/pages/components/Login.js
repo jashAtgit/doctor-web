@@ -14,15 +14,12 @@ import {
     Container,
 
 } from "@mantine/core"
-import Link from 'next/link'
 import { loginDoctor } from '../services/doctor';
 import { useEffect, useState } from "react";
 
 
 
-export default Login;
-
-function Login({ props }) {
+export default function Login({ props }) {
 
     const [bgNo, setBgNo] = useState(2);
 

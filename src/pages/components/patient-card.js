@@ -12,13 +12,13 @@ import {
 
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
-import { getAllActivities } from '../services/item';
-import { getPatientActivities, getPatientMoods } from '../services/patient';
-import { getDemographics } from '../services/user';
-import { ActivitySelectionTable } from './activities-table';
+import getAllActivities from '../services/item';
+import getPatientMoods, { getPatientActivities}  from '../services/patient';
+import getDemographics from '../services/user';
+import ActivitySelectionTable from './activities-table';
 import Chat from './Chat';
-import { AssignmentsTable } from './AssignmentsTable';
-import { MoodChart } from './MoodChart';
+import AssignmentsTable from './AssignmentsTable';
+import MoodChart from './MoodChart';
 
 export default function PatientCard({ patientData }) {
   const PRIMARY_COL_HEIGHT = rem(300)

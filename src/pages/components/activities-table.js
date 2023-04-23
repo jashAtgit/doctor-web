@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { notifications } from '@mantine/notifications';
 import { createStyles, Table, Checkbox, ScrollArea, Group, Divider, Text, rem, Select, SelectItem, Button, Space, Paper } from '@mantine/core';
-import { pushAssignments } from '../services/assignment';
+import pushAssignments from '../services/assignment';
 import { IconCheck, IconX } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({

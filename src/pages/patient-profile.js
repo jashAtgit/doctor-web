@@ -10,7 +10,7 @@ import {
     createStyles,
 
 } from "@mantine/core";
-import { PatientCard } from "./components/patient-card";
+import PatientCard from "./components/patient-card";
 import { useEffect, useState } from "react";
 import { getPatientMedHist } from "./services/patient";
 import { Notifications } from '@mantine/notifications';

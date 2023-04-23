@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export async function pushAssignments(assignment_list) {
+export default async function pushAssignments(assignment_list) {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     console.log(assignment_list);
@@ -22,5 +22,3 @@ export async function pushAssignments(assignment_list) {
     });
     return response
 }
-
-export default pushAssignments;

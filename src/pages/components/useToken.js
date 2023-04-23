@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 export default function useToken() {
-  console.log("inside useToken");
 
   let token, setToken;
     

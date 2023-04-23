@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   createStyles,
   Navbar,
@@ -9,7 +8,6 @@ import {
   Image,
 } from "@mantine/core"
 import {
-  IconHome,
   IconLogout,
   IconArrowLeft,
 } from "@tabler/icons-react"

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   createStyles,
   Navbar,
@@ -12,7 +11,6 @@ import {
   IconSettings,
   IconLogout,
   IconUsers,
-  IconActivityHeartbeat,
 } from "@tabler/icons-react"
 
 
