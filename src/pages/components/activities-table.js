@@ -55,7 +55,7 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
 }
 
 
-export function ActivitySelectionTable({ data, doctor_id, patient_id }) {
+export default function ActivitySelectionTable({ data, doctor_id, patient_id }) {
 
   //using hashTable to map <activityId : value choice>
   const [selectedValues, setSelectedValues] = useState(

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export async function getDocIdByEmail(username) {
+export default async function getDocIdByEmail(username) {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     //get doctor using username

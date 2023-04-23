@@ -23,7 +23,7 @@ import { getQuestionsByActId } from "../services/item";
 import { getAnswerByQuestionId } from "../services/patient";
 import QA from "./QA";
  
-export function AssignmentsTable({ data, patientId }) {
+export default function AssignmentsTable({ data, patientId }) {
 
   const [currActId, setCurrActId] = useState();
   const [currActivity, setCurrentActivity] = useState();

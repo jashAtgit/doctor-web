@@ -22,3 +22,5 @@ export async function pushAssignments(assignment_list) {
     });
     return response
 }
+
+export default pushAssignments;

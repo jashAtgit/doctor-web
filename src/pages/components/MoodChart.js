@@ -23,7 +23,7 @@ ChartJS.register(
   Legend
 )
 
-export function MoodChart({patientId}) {
+export default function MoodChart({patientId}) {
     const [moodList, setMoodList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {

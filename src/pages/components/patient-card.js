@@ -20,7 +20,7 @@ import Chat from './Chat';
 import { AssignmentsTable } from './AssignmentsTable';
 import { MoodChart } from './MoodChart';
 
-export function PatientCard({ patientData }) {
+export default function PatientCard({ patientData }) {
   const PRIMARY_COL_HEIGHT = rem(300)
   const theme = useMantineTheme()
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getAllActivities() {
+export default async function getAllActivities() {
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     //get all available activities

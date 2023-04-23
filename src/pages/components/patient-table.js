@@ -17,7 +17,7 @@ import {
 } from "@tabler/icons-react"
 import Link from "next/link"
  
-export function PatientsTable({ data, userId}) {
+export default function PatientsTable({ data, userId}) {
 
   const doctor_id = userId;
   

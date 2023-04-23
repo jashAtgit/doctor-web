@@ -31,7 +31,7 @@ import { Title } from "chart.js"
     }
   }))
   
-  export function DoctorProfile({userId, email, patientCount, happyCount}) {
+  export default function DoctorProfile({userId, email, patientCount, happyCount}) {
     const { classes, theme } = useStyles()
     const [demographics, setDemographics] = useState();
     const [doctorDetails, setDoctorDetails] = useState();

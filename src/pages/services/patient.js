@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export async function getPatientMoods(patient_id) {
+export default async function getPatientMoods(patient_id) {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     //get patient's mood on current date(or latest)

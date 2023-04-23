@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 
 
 
-export function Login({ props }) {
+export default function Login({ props }) {
 
     const [bgNo, setBgNo] = useState(2);
 
