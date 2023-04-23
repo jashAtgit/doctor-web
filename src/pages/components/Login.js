@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 
 
 
+export default Login;
 
 function Login({ props }) {
 
@@ -151,4 +152,4 @@ function Login({ props }) {
     )
 }
 
-export default Login;
+
