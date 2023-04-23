@@ -61,14 +61,14 @@ import { Title } from "chart.js"
   
     return (
 
-      <Container size="auto">
+      <Container size="content">
         <SimpleGrid
           cols={1}
           spacing="md"
           breakpoints={[{ maxWidth: "sm", cols: 1 }]}
         >
           <Card withBorder padding="xl" radius="md" className={classes.card}>
-            <Card.Section sx={{ background: `url(doctor-profile-background.jpg)`, height: 150 }} />
+            <Card.Section sx={{ background: `url(doctor-profile-background.jpg)`, backgroundSize: 'cover', height: 200 }} />
             <Avatar
               src='doctor-avatar.jpg'
               size={150}
