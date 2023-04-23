@@ -3,16 +3,11 @@ import {
     createStyles,
     TextInput,
     PasswordInput,
-    Checkbox,
     Button,
-    Title,
     Text,
     Anchor,
     rem,
     Image,
-    Flex,
-    Container,
-
 } from "@mantine/core"
 import { loginDoctor } from '../services/doctor';
 import { useEffect, useState } from "react";
@@ -66,7 +61,19 @@ export default function Login({ props }) {
         return /\S+@\S+\.\S+/.test(email);
     }
 
+    function handleNewAccount() {
+        const email = "jaswanth.chapiri@iiitb.ac.in";
+        const subject = "I want to get registered as a Doctor in Better-U, my details are attached.";
+      
+        const url = `mailto:${email}?subject=${subject}`;
+      
+        window.location.href = url;
+    }
+
     const handleLogin = async e => {
+
+        
+          
 
         e.preventDefault();
 
@@ -138,7 +145,7 @@ export default function Login({ props }) {
                     <Anchor
                         href="#"
                         weight={700}
-                        onClick={event => event.preventDefault()}
+                        onClick={event => {event.preventDefault(); handleNewAccount()}}
                     >
                         Contact admin
                     </Anchor>
