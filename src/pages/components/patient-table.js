@@ -26,12 +26,12 @@ export default function PatientsTable({ data, userId}) {
     <tr key={item.userId}>
       <td>
         <Group spacing="sm">
-          <Avatar src={item.moods[item.moods.length-1].moodValue === 1 ? 'avatar-1.png' :
+          <Avatar src={item.moods[item.moods.length-1] ? (item.moods[item.moods.length-1].moodValue === 1 ? 'avatar-1.png' :
             item.moods[item.moods.length-1].moodValue === 2 ? 'avatar-2.png' :
             item.moods[item.moods.length-1].moodValue === 3 ? 'avatar-3.png' :
             item.moods[item.moods.length-1].moodValue === 4 ? 'avatar-4.png' :
             item.moods[item.moods.length-1].moodValue === 5 ? 'avatar-5.png' :
-            'avatar-6.png'
+            'avatar-6.png') : 'avatar-6.png'
           }
            size={80} radius="lg"/>
           <div>

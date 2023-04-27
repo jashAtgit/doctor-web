@@ -4,8 +4,6 @@ import axios from "axios";
 export default async function pushAssignments(assignment_list) {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-    console.log(assignment_list);
-    console.log(JSON.stringify(assignment_list));
     
     const response = axios.post('/assignment', assignment_list,
     {

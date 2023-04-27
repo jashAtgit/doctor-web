@@ -47,7 +47,13 @@ export default function PatientCard({ patientData }) {
       setDocName(docDemographics.firstName + " " + docDemographics.lastName);
 
       const moods = await getPatientMoods(patient_id);
-      setMoodVal(moods[moods.length - 1].moodValue);
+      if(moods[moods.length - 1]){
+        setMoodVal(moods[moods.length - 1].moodValue);
+      }
+      else{
+        setMoodVal(0);
+      }
+      
 
 
 

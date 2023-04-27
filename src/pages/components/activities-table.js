@@ -32,7 +32,6 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
       item_level: levels[selection[i]],
     });
   }
-    console.log(json_list);
 
     const response = await pushAssignments(json_list);
     if(response === true){
