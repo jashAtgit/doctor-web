@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default async function getDocIdByEmail(username) {
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
     //get doctor using username
     const response = axios.get(`/users/${username}`,
     {
@@ -37,7 +37,7 @@ export async function loginDoctor(credentials) {
 
 export async function getPatientIdsByDocId(doc_id) {
     //get list of patients with this doc_id
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
 
     const response = axios.get(`/doctors/${doc_id}/patients`,
     {
@@ -57,7 +57,7 @@ export async function getPatientIdsByDocId(doc_id) {
 
 export async function getDoctorDetails(userId) {
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
     //get doctor using username
     const response = axios.get(`/doctors/${userId}/doctor-details`,
     {

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default async function getPatientMoods(patient_id) {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
 
     //get patient's mood on current date(or latest)
     const response = axios.get(`/patients/${patient_id}/mood`,
@@ -24,7 +24,7 @@ export default async function getPatientMoods(patient_id) {
 
 export async function getPatientMedHist(patient_id) {
     // get patient's medical history by patient_id
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
 
     const response = axios.get(`/patients/${patient_id}/medical-history`,
     {
@@ -44,7 +44,7 @@ export async function getPatientMedHist(patient_id) {
 // get all activities assigned to patient with given ID
 export async function getPatientActivities(patientId) {
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
     //get all available activities
     const response = axios.get(`/patients/${patientId}/assignments`,
     {
@@ -65,7 +65,7 @@ export async function getPatientActivities(patientId) {
 // /patients/{patientId}/answers/{questionId}
 export async function getAnswerByQuestionId(patientId, questionId) {
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
     //get all available activities
     const response = axios.get(`/patients/${patientId}/answers/${questionId}`,
     {

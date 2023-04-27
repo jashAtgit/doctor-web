@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async function getAllActivities() {
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
     //get all available activities
     const response = axios.get(`/activities`,
     {
@@ -21,7 +21,7 @@ export default async function getAllActivities() {
 
 export async function getQuestionsByActId(activityId) {
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
     //get all available activities
     const response = axios.get(`/activities/${activityId}/questions`,
     {

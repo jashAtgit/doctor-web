@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function getDemographics(user_id) {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const token = typeof window !== undefined ? localStorage.getItem('token') : null;
 
     const response = axios.get(`/users/${user_id}/demographics`,
     {
