@@ -9,6 +9,7 @@ import {
     Title,
     Divider,
     Blockquote,
+    LoadingOverlay,
 
   } from "@mantine/core"
 
@@ -83,7 +84,7 @@ export default function AssignmentsTable({ data, patientId }) {
   ))
 
   if(isLoading){
-    return <h1>Loading....</h1>
+    return  <LoadingOverlay visible={true} overlayBlur={2} />
   }
 
   return (

@@ -8,7 +8,7 @@ export default async function getDocIdByEmail(username) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
     },
     }).then(response => response.data.response)
     .catch(err => {

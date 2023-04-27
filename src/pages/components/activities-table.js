@@ -73,7 +73,6 @@ export default function ActivitySelectionTable({ data, doctor_id, patient_id }) 
   const rows = data.map((item) => {
     const selected = selection.includes(item.activityId);
 
-    // console.log(selectedValues);
    
     return (
       <tr key={item.activityId} className={cx({ [classes.rowSelected]: selected })}>

@@ -11,7 +11,7 @@ import {
 } from "chart.js"
 import { Line } from "react-chartjs-2"
 import getPatientMoods from "../services/patient";
-
+import { LoadingOverlay } from "@mantine/core";
 
 ChartJS.register(
   CategoryScale,
@@ -84,7 +84,7 @@ export default function MoodChart({patientId}) {
     }
 
     if(isLoading){
-        return <h1>Loading...</h1>
+        return  <LoadingOverlay visible={true} overlayBlur={2} />
     }
 
     return <Line options={options} data={data} />
