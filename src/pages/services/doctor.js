@@ -9,6 +9,7 @@ export default async function getDocIdByEmail(username) {
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {
@@ -24,6 +25,7 @@ export async function loginDoctor(credentials) {
     const response = await axios.post('/auth/login', credentials, {
     headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true,
     },
     })
     .then(response => response.data)
@@ -43,7 +45,8 @@ export async function getPatientIdsByDocId(doc_id) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {
@@ -63,7 +66,8 @@ export async function getDoctorDetails(userId) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {

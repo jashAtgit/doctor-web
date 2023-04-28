@@ -7,7 +7,8 @@ export default async function getDemographics(user_id) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {

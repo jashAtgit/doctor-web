@@ -8,7 +8,8 @@ export default async function getPatientMoods(patient_id) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data)
     .catch(err => {
@@ -30,7 +31,8 @@ export async function getPatientMedHist(patient_id) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {
@@ -50,7 +52,8 @@ export async function getPatientActivities(patientId) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {
@@ -71,7 +74,8 @@ export async function getAnswerByQuestionId(patientId, questionId) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data)
     .catch(err => {

@@ -8,7 +8,8 @@ export default async function getAllActivities() {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data.response)
     .catch(err => {
@@ -27,7 +28,8 @@ export async function getQuestionsByActId(activityId) {
     {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'ngrok-skip-browser-warning': true,
     },
     }).then(response => response.data)
     .catch(err => {
