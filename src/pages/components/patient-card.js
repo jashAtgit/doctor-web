@@ -13,7 +13,7 @@ import {
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import getAllActivities from '../services/item';
-import getPatientMoods, { getPatientActivities}  from '../services/patient';
+import getPatientMoods, { getPatientActivities } from '../services/patient';
 import getDemographics from '../services/user';
 import ActivitySelectionTable from './activities-table';
 import Chat from './Chat';
@@ -47,13 +47,13 @@ export default function PatientCard({ patientData }) {
       setDocName(docDemographics.firstName + " " + docDemographics.lastName);
 
       const moods = await getPatientMoods(patient_id);
-      if(moods[moods.length - 1]){
+      if (moods[moods.length - 1]) {
         setMoodVal(moods[moods.length - 1].moodValue);
       }
-      else{
+      else {
         setMoodVal(0);
       }
-      
+
 
 
 
@@ -116,12 +116,13 @@ export default function PatientCard({ patientData }) {
                         </Text>
                         <Group>
                           <Text ta="center" c="dimmed" fz="md">
-                            {`${demographicsData.age} years • ${demographicsData.gender}`}
+                            {`Age: ${demographicsData.age} years • Gender: ${demographicsData.gender}`}
                           </Text>
-                          <Text ta="center" c="dimmed" fz="md">
-                            {`User-Id : ${medData.id}`}
-                          </Text>
+
                         </Group>
+                        <Text ta="left" c="dimmed" fz="md">
+                          {`User-Id : ${medData.id}`}
+                        </Text>
                       </Stack>
                     </Flex>
                   </div>

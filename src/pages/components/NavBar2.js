@@ -18,8 +18,10 @@ const useStyles = createStyles(theme => ({
 
   navbar: {
     background: `#6972FF`,
+    backgroundImage: `url("wavy-background.png")`,
     backgroundRepeat: "no-repeat",
     },
+
 
 
   version: {
