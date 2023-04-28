@@ -38,6 +38,7 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
       notifications.show({
         color: 'blue',
         title: 'Success',
+        autoClose: 5000,
         message: 'Assigments have been pushed',
         icon: <IconCheck size="1rem" />,
       })

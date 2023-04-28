@@ -84,6 +84,7 @@ export default function Login({ props }) {
                 title: "Login failed",
                 message: "Please enter valid credentials",
                 color: 'red',
+                autoClose: 5000,
             });
 
             return;
