@@ -11,7 +11,7 @@ export default async function getDocIdByEmail(username) {
         'Authorization': `Bearer ${token}`,
         'ngrok-skip-browser-warning': true,
     },
-    }).then(response => response.data.response)
+    }).then(response => response.data)
     .catch(err => {
         console.log("error code : " + err.response.status);
         return "error";

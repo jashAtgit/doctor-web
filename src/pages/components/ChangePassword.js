@@ -14,6 +14,7 @@ import {
 import { useInputState } from "@mantine/hooks"
 import { IconCheck, IconX } from "@tabler/icons-react"
 import { notifications } from "@mantine/notifications"
+import { changePassword } from "../services/user"
 
 function PasswordRequirement({ meets, label }) {
     return (
@@ -79,17 +80,37 @@ export default function ChangePassword() {
             />
         ))
 
-    function handleClick() {
+    async function handleClick() {
         console.log("button-clicked!!");
         if (value === confirmValue && value.trim() != "") {
             //hit api and based on response show notification
-            notifications.show({
-                color: 'green',
-                title: 'Success',
-                autoClose: 5000,
-                message: 'Password has been Changed!!',
-                icon: <IconCheck size="1rem" />,
-            })
+            const email = typeof window !== undefined ? localStorage.getItem('email') : null;
+            let data = {
+                email: email,
+                oldPassword: oldPass,
+                newPassword: confirmValue,
+            }
+
+            const response = await changePassword(data);
+            if(response.status == 200){
+                notifications.show({
+                    color: 'green',
+                    title: 'Success',
+                    autoClose: 5000,
+                    message: 'Password has been Changed!!',
+                    icon: <IconCheck size="1rem" />,
+                });
+            }
+            else{
+                notifications.show({
+                    color: 'red',
+                    title: 'Failed',
+                    autoClose: 5000,
+                    message: 'Old Password is Incorrect!!',
+                    icon: <IconX size="1rem" />,
+                })
+            }
+            
 
             console.log(checks);
         }
