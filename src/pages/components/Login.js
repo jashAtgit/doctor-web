@@ -73,9 +73,6 @@ export default function Login({ props }) {
 
     const handleLogin = async e => {
 
-        
-          
-
         e.preventDefault();
 
         if (!valid(email) || !password) {

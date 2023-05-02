@@ -79,9 +79,9 @@ export default function ChangePassword() {
             />
         ))
 
-    function handleClick(){
+    function handleClick() {
         console.log("button-clicked!!");
-        if(value === confirmValue){
+        if (value === confirmValue && value.trim() != "") {
             //hit api and based on response show notification
             notifications.show({
                 color: 'green',
@@ -89,33 +89,34 @@ export default function ChangePassword() {
                 autoClose: 5000,
                 message: 'Password has been Changed!!',
                 icon: <IconCheck size="1rem" />,
-              })
+            })
 
-              console.log(checks);
+            console.log(checks);
         }
-        else{
+        else {
             notifications.show({
                 color: 'red',
                 title: 'Failed',
                 autoClose: 5000,
-                message: 'Passwords do not match!!',
+                message: 'Check inputs and try again!!',
                 icon: <IconX size="1rem" />,
-              })
+            })
         }
-        
+
     }
 
     return (
-        <div>
+        <Container size="content">
             <Card shadow="sm" padding="lg" radius="md" withBorder>
-                <Stack maw={380} mx="auto" spacing="xl">
-                <PasswordInput
+                <Stack maw={500} mx="auto" spacing="xl">
+                    <PasswordInput
                         value={oldPass}
                         onChange={setOldPass}
                         placeholder="Old Password"
                         label="Old Password"
                         required
                     />
+                    <Divider />
 
                     <PasswordInput
                         value={value}
@@ -135,7 +136,7 @@ export default function ChangePassword() {
                     />
                     {checks}
 
-                    <Divider />
+
                     <PasswordInput
                         value={confirmValue}
                         onChange={setConfirmValue}
@@ -144,10 +145,10 @@ export default function ChangePassword() {
                         required
                     />
                     <Button className="button-eval" variant="default" mt="xl" radius="xl" shadow="sm" onClick={handleClick}>
-                    Send message
+                        Change Password
                     </Button>
                 </Stack>
             </Card>
-        </div>
+        </Container>
     )
 }

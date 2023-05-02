@@ -36,7 +36,7 @@ async function handleAssign(doctor_id, patient_id, selection, levels){
     const response = await pushAssignments(json_list);
     if(response === true){
       notifications.show({
-        color: 'blue',
+        color: 'green',
         title: 'Success',
         autoClose: 5000,
         message: 'Assigments have been pushed',

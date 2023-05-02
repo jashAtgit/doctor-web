@@ -8,6 +8,7 @@ import getDocIdByEmail, { getPatientIdsByDocId} from '../services/doctor';
 import { useEffect, useState } from 'react';
 import DoctorProfile from './DoctorProfile';
 import ChangePassword from './ChangePassword';
+import { getPatientActivities } from '../services/patient';
 
 
 function Dashboard({props}) {
@@ -44,6 +45,17 @@ function Dashboard({props}) {
         }
         if(moods != 'error')
           patientDemographics['moods'] = moods;
+
+        const assignedActs =  await getPatientActivities(patientId);
+        let c=0;
+        for(let act of assignedActs){
+          if(act.completed){
+            c=c+1;
+          }
+        }
+
+        patientDemographics['completed'] = c;
+        patientDemographics['totalActs'] = assignedActs.length;
         demographicsData.push(patientDemographics);
       }
       setPatientList(demographicsData);
