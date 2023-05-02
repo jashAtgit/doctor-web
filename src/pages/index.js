@@ -11,7 +11,7 @@ function Home() {
   return (
     <>
       <Head>
-          <title>Better You</title>
+          <title>Better U</title>
       </Head>
       <MantineProvider 
       withNormalizeCSS 

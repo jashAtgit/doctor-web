@@ -10,6 +10,7 @@ import {
     Stack,
     Divider,
     Button,
+    Space,
 } from "@mantine/core"
 import { useInputState } from "@mantine/hooks"
 import { IconCheck, IconX } from "@tabler/icons-react"
@@ -92,7 +93,7 @@ export default function ChangePassword() {
             }
 
             const response = await changePassword(data);
-            if(response.status == 200){
+            if (response.status == 200) {
                 notifications.show({
                     color: 'green',
                     title: 'Success',
@@ -101,7 +102,7 @@ export default function ChangePassword() {
                     icon: <IconCheck size="1rem" />,
                 });
             }
-            else{
+            else {
                 notifications.show({
                     color: 'red',
                     title: 'Failed',
@@ -110,7 +111,7 @@ export default function ChangePassword() {
                     icon: <IconX size="1rem" />,
                 })
             }
-            
+
 
             console.log(checks);
         }
@@ -165,10 +166,12 @@ export default function ChangePassword() {
                         label="Confirm Password"
                         required
                     />
+
                     <Button className="button-eval" variant="default" mt="xl" radius="xl" shadow="sm" onClick={handleClick}>
                         Change Password
                     </Button>
                 </Stack>
+                <Space h="xl" />
             </Card>
         </Container>
     )
