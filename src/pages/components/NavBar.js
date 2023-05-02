@@ -11,6 +11,7 @@ import {
   IconSettings,
   IconLogout,
   IconUsers,
+  IconKey,
 } from "@tabler/icons-react"
 
 
@@ -99,7 +100,8 @@ const useStyles = createStyles(theme => ({
 
 const data = [
   { link: "", label: "Patients", icon: IconUsers },
-  { link: "", label: "My Profile", icon: IconSettings }
+  { link: "", label: "My Profile", icon: IconSettings },
+  { link: "", label: "Change Password", icon: IconKey }
 ]
 
 function NavBarSimple({clearToken, setToken, active, setActive}) {

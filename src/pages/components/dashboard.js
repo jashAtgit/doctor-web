@@ -7,6 +7,7 @@ import getDemographics from '../services/user';
 import getDocIdByEmail, { getPatientIdsByDocId} from '../services/doctor';
 import { useEffect, useState } from 'react';
 import DoctorProfile from './DoctorProfile';
+import ChangePassword from './ChangePassword';
 
 
 function Dashboard({props}) {
@@ -77,8 +78,9 @@ function Dashboard({props}) {
       navbar={<Navbar width={{ base: 350 }} height={700} p="xs">{ <NavBarSimple clearToken={clearToken} setToken={setToken} active={active} setActive={setActive}  />}</Navbar>}
     >
       {<>
-       {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> :
-        <DoctorProfile userId={userId} email={email} patientCount={patient_list.length} happyCount={happyCount}/> }
+       {active === 'Patients' ? <PatientsTable data={patient_list} userId={userId} /> : active === 'My Profile' ?
+        <DoctorProfile userId={userId} email={email} patientCount={patient_list.length} happyCount={happyCount}/> : 
+         <ChangePassword/>}
        </>}
     </AppShell>
     </div>
