@@ -42,7 +42,6 @@ import { getDoctorDetails } from "../services/doctor"
         async function fetchData(userId){
             const demographics = await getDemographics(userId);
             setDemographics(demographics);
-
             const doctorDetails = await getDoctorDetails(userId);
             setDoctorDetails(doctorDetails);
         }
@@ -79,7 +78,7 @@ import { getDoctorDetails } from "../services/doctor"
             <Group position="center">
               <Stack spacing="1px">
                 <Text ta="center" fz="xl" fw={500} mt="sm">
-                  {demographics.firstName + " " + demographics.lastName}
+                  Dr. {demographics.firstName + " " + demographics.lastName}
                 </Text>
                 <Text ta="center" fz="lg" c="dimmed">
                   {`${email} • ${demographics.age} years`}

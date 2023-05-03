@@ -87,7 +87,7 @@ export default function ActivitySelectionTable({ data, doctor_id, patient_id }) 
         <td>
           <Group spacing="sm">
             <Text size="lg" weight={500}>
-              {item.name}
+              {item.name}-{item.activityId}
             </Text>
           </Group>
         </td>

@@ -20,6 +20,7 @@ function Dashboard({props}) {
   const [patient_list, setPatientList] = useState([]);
   const [active, setActive] = useState("Patients")
   const [happyCount, setHappyCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   function clearToken(){
@@ -60,8 +61,10 @@ function Dashboard({props}) {
       }
       setPatientList(demographicsData);
       setHappyCount(count);
+      setIsLoading(false);
     }
     fetchData();
+    
   }, []);
 
   const useStyles = createStyles(theme => ({
@@ -76,7 +79,7 @@ function Dashboard({props}) {
     const { classes, cx } = useStyles();
 
 
-  if(!patient_list || patient_list === 'undefined' || patient_list.length === 0){
+  if(isLoading){
     return (
       <LoadingOverlay visible={true} overlayBlur={2} />
     )

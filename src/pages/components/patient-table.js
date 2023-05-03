@@ -5,8 +5,9 @@ import {
   ScrollArea,
   Avatar,
   RingProgress,
-  ThemeIcon,
   Center,
+  Blockquote,
+  Image,
 } from "@mantine/core"
 
 import {
@@ -23,6 +24,7 @@ import Link from "next/link"
 export default function PatientsTable({ data, userId }) {
 
   const doctor_id = userId;
+  console.log(data);
 
   const rows = data.map(item => (
     <tr key={item.userId}>
@@ -83,6 +85,18 @@ export default function PatientsTable({ data, userId }) {
       </td>
     </tr>
   ))
+
+  if (data.length == 0) {
+    return (
+      <>
+      <Blockquote cite="– Admin">
+          No patients assigned yet.
+        </Blockquote>
+      <Image fit="cover" src="no-patients.svg" alt="Waiting image" />
+        
+      </>
+    );
+  }
 
   return (
     <ScrollArea>
